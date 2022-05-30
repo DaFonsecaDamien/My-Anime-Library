@@ -5,46 +5,28 @@ import java.util.ArrayList;
 public class Library {
 
     private String id;
-    private String name;
-    private ArrayList<Category> categories;
-    private String description;
 
-    public Library(String id, String name, ArrayList<Category> categories, String description) {
+    private ArrayList<Stack> stacks;
+
+
+    public Library(String id, ArrayList<Stack> categories) {
         this.id = id;
-        this.name = name;
-        this.categories = categories;
-        this.description = description;
+        this.stacks = categories;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCategories(ArrayList<Category> categories) {
-        this.categories = categories;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStacks(ArrayList<Stack> stacks) {
+        this.stacks = stacks;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public ArrayList<Category> getCategories() {
-        return categories;
-    }
-
-    public String getDescription() {
-        return description;
+    public ArrayList<Stack> getStacks() {
+        return stacks;
     }
 }

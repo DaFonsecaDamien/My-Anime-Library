@@ -11,29 +11,31 @@ public class Anime {
     private Integer year;
     private Integer episodes;
     private String durationPerEpisodes;
-    private Integer volumes;
     private String studio;
     private String synopsys;
     private String type;
-    private MangaState state;
+    private AnimeState state;
     private ArrayList<String> genre;
     private ArrayList<Score> scores;
+    private float averageScore;
+    private Integer nbVotes;
     private Integer rank;
 
-    public Anime(String id, Map<String, String> titles, String imageUrl, Integer year, Integer episodes, String durationPerEpisodes, Integer volumes, String studio, String synopsys, String type, MangaState state, ArrayList<String> genre, ArrayList<Score> scores, Integer rank) {
+    public Anime(String id, Map<String, String> titles, String imageUrl, Integer year, Integer episodes, String durationPerEpisodes, String studio, String synopsys, String type, AnimeState state, ArrayList<String> genre, ArrayList<Score> scores, float averageScore, Integer nbVotes, Integer rank) {
         this.id = id;
         this.titles = titles;
         this.imageUrl = imageUrl;
         this.year = year;
         this.episodes = episodes;
         this.durationPerEpisodes = durationPerEpisodes;
-        this.volumes = volumes;
         this.studio = studio;
         this.synopsys = synopsys;
         this.type = type;
         this.state = state;
         this.genre = genre;
         this.scores = scores;
+        this.averageScore = averageScore;
+        this.nbVotes = nbVotes;
         this.rank = rank;
     }
 
@@ -61,10 +63,6 @@ public class Anime {
         this.durationPerEpisodes = durationPerEpisodes;
     }
 
-    public void setVolumes(Integer volumes) {
-        this.volumes = volumes;
-    }
-
     public void setStudio(String studio) {
         this.studio = studio;
     }
@@ -77,7 +75,7 @@ public class Anime {
         this.type = type;
     }
 
-    public void setState(MangaState state) {
+    public void setState(AnimeState state) {
         this.state = state;
     }
 
@@ -87,6 +85,14 @@ public class Anime {
 
     public void setScores(ArrayList<Score> scores) {
         this.scores = scores;
+    }
+
+    public void setAverageScore(float averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public void setNbVotes(Integer nbVotes) {
+        this.nbVotes = nbVotes;
     }
 
     public void setRank(Integer rank) {
@@ -117,10 +123,6 @@ public class Anime {
         return durationPerEpisodes;
     }
 
-    public Integer getVolumes() {
-        return volumes;
-    }
-
     public String getStudio() {
         return studio;
     }
@@ -133,7 +135,7 @@ public class Anime {
         return type;
     }
 
-    public MangaState getState() {
+    public AnimeState getState() {
         return state;
     }
 
@@ -143,6 +145,14 @@ public class Anime {
 
     public ArrayList<Score> getScores() {
         return scores;
+    }
+
+    public float getAverageScore() {
+        return averageScore;
+    }
+
+    public Integer getNbVotes() {
+        return nbVotes;
     }
 
     public Integer getRank() {

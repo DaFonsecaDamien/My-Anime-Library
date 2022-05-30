@@ -1,5 +1,5 @@
 package com.example.myanimelibrary.domain;
 
-public enum CategoryVisibility {
+public enum StackVisibility {
     PRIVATE, PUBLIC
 }

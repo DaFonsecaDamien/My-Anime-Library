@@ -2,15 +2,15 @@ package com.example.myanimelibrary.domain;
 
 import java.util.ArrayList;
 
-public class Category {
+public class Stack {
 
     private String id;
     private String name;
     private ArrayList<UserManga> userMangas;
     private ArrayList<UserAnime> userAnimes;
-    private CategoryVisibility visibility;
+    private StackVisibility visibility;
 
-    public Category(String id, String name, ArrayList<UserManga> userMangas, ArrayList<UserAnime> userAnimes, CategoryVisibility visibility) {
+    public Stack(String id, String name, ArrayList<UserManga> userMangas, ArrayList<UserAnime> userAnimes, StackVisibility visibility) {
         this.id = id;
         this.name = name;
         this.userMangas = userMangas;
@@ -34,7 +34,7 @@ public class Category {
         this.userAnimes = userAnimes;
     }
 
-    public void setVisibility(CategoryVisibility visibility) {
+    public void setVisibility(StackVisibility visibility) {
         this.visibility = visibility;
     }
 
@@ -54,7 +54,7 @@ public class Category {
         return userAnimes;
     }
 
-    public CategoryVisibility getVisibility() {
+    public StackVisibility getVisibility() {
         return visibility;
     }
 }

@@ -19,135 +19,154 @@ public class Manga {
         private MangaState state;
         private ArrayList<String> genre;
         private ArrayList<Score> scores;
+        private float averageScore;
+        private Integer nbVotes;
         private Integer rank;
 
-        public Manga(String id, Map<String, String> titles, String imageUrl, LocalDate startDate, LocalDate endDate, Integer chapters, Integer volumes, String author, String synopsys, String type, MangaState state, ArrayList<String> genre, ArrayList<Score> scores, Integer rank) {
-            this.id = id;
-            this.titles = titles;
-            this.imageUrl = imageUrl;
-            this.startDate = startDate;
-            this.endDate = endDate;
-            this.chapters = chapters;
-            this.volumes = volumes;
-            this.author = author;
-            this.synopsys = synopsys;
-            this.type = type;
-            this.state = state;
-            this.genre = genre;
-            this.scores = scores;
-            this.rank = rank;
-        }
+    public Manga(String id, Map<String, String> titles, String imageUrl, LocalDate startDate, LocalDate endDate, Integer chapters, Integer volumes, String author, String synopsys, String type, MangaState state, ArrayList<String> genre, ArrayList<Score> scores, float averageScore, Integer nbVotes, Integer rank) {
+        this.id = id;
+        this.titles = titles;
+        this.imageUrl = imageUrl;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.chapters = chapters;
+        this.volumes = volumes;
+        this.author = author;
+        this.synopsys = synopsys;
+        this.type = type;
+        this.state = state;
+        this.genre = genre;
+        this.scores = scores;
+        this.averageScore = averageScore;
+        this.nbVotes = nbVotes;
+        this.rank = rank;
+    }
 
-        public void setId(String id) {
-            this.id = id;
-        }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-        public void setTitles(Map<String, String> titles) {
-            this.titles = titles;
-        }
+    public void setTitles(Map<String, String> titles) {
+        this.titles = titles;
+    }
 
-        public void setImageUrl(String imageUrl) {
-            this.imageUrl = imageUrl;
-        }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-        public void setStartDate(LocalDate startDate) {
-            this.startDate = startDate;
-        }
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
 
-        public void setEndDate(LocalDate endDate) {
-            this.endDate = endDate;
-        }
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 
-        public void setChapters(Integer chapters) {
-            this.chapters = chapters;
-        }
+    public void setChapters(Integer chapters) {
+        this.chapters = chapters;
+    }
 
-        public void setVolumes(Integer volumes) {
-            this.volumes = volumes;
-        }
+    public void setVolumes(Integer volumes) {
+        this.volumes = volumes;
+    }
 
-        public void setAuthor(String author) {
-            this.author = author;
-        }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-        public void setSynopsys(String synopsys) {
-            this.synopsys = synopsys;
-        }
+    public void setSynopsys(String synopsys) {
+        this.synopsys = synopsys;
+    }
 
-        public void setType(String type) {
-            this.type = type;
-        }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-        public void setState(MangaState state) {
-            this.state = state;
-        }
+    public void setState(MangaState state) {
+        this.state = state;
+    }
 
-        public void setGenre(ArrayList<String> genre) {
-            this.genre = genre;
-        }
+    public void setGenre(ArrayList<String> genre) {
+        this.genre = genre;
+    }
 
-        public void setScores(ArrayList<Score> scores) {
-            this.scores = scores;
-        }
+    public void setScores(ArrayList<Score> scores) {
+        this.scores = scores;
+    }
 
-        public void setRank(Integer rank) {
-            this.rank = rank;
-        }
+    public void setAverageScore(float averageScore) {
+        this.averageScore = averageScore;
+    }
 
-        public String getId() {
-            return id;
-        }
+    public void setNbVotes(Integer nbVotes) {
+        this.nbVotes = nbVotes;
+    }
 
-        public Map<String, String> getTitles() {
-            return titles;
-        }
+    public void setRank(Integer rank) {
+        this.rank = rank;
+    }
 
-        public String getImageUrl() {
-            return imageUrl;
-        }
+    public String getId() {
+        return id;
+    }
 
-        public LocalDate getStartDate() {
-            return startDate;
-        }
+    public Map<String, String> getTitles() {
+        return titles;
+    }
 
-        public LocalDate getEndDate() {
-            return endDate;
-        }
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
-        public Integer getChapters() {
-            return chapters;
-        }
+    public LocalDate getStartDate() {
+        return startDate;
+    }
 
-        public Integer getVolumes() {
-            return volumes;
-        }
+    public LocalDate getEndDate() {
+        return endDate;
+    }
 
-        public String getAuthor() {
-            return author;
-        }
+    public Integer getChapters() {
+        return chapters;
+    }
 
-        public String getSynopsys() {
-            return synopsys;
-        }
+    public Integer getVolumes() {
+        return volumes;
+    }
 
-        public String getType() {
-            return type;
-        }
+    public String getAuthor() {
+        return author;
+    }
 
-        public MangaState getState() {
-            return state;
-        }
+    public String getSynopsys() {
+        return synopsys;
+    }
 
-        public ArrayList<String> getGenre() {
-            return genre;
-        }
+    public String getType() {
+        return type;
+    }
 
-        public ArrayList<Score> getScores() {
-            return scores;
-        }
+    public MangaState getState() {
+        return state;
+    }
 
-        public Integer getRank() {
-            return rank;
-        }
+    public ArrayList<String> getGenre() {
+        return genre;
+    }
 
+    public ArrayList<Score> getScores() {
+        return scores;
+    }
+
+    public float getAverageScore() {
+        return averageScore;
+    }
+
+    public Integer getNbVotes() {
+        return nbVotes;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
 }
