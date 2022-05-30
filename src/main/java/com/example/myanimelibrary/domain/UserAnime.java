@@ -7,13 +7,15 @@ public class UserAnime {
     private Integer currentEpisode;
     private Integer score;
     private String comment;
+    private String animeSiteUri;
 
-    public UserAnime(Anime manga, User user, Integer currentEpisode, Integer score, String comment) {
+    public UserAnime(Anime manga, User user, Integer currentEpisode, Integer score, String comment, String animeSiteUri) {
         this.manga = manga;
         this.user = user;
         this.currentEpisode = currentEpisode;
         this.score = score;
         this.comment = comment;
+        this.animeSiteUri = animeSiteUri;
     }
 
     public void setManga(Anime manga) {
@@ -36,6 +38,10 @@ public class UserAnime {
         this.comment = comment;
     }
 
+    public void setAnimeSiteUri(String animeSiteUri) {
+        this.animeSiteUri = animeSiteUri;
+    }
+
     public Anime getManga() {
         return manga;
     }
@@ -54,5 +60,9 @@ public class UserAnime {
 
     public String getComment() {
         return comment;
+    }
+
+    public String getAnimeSiteUri() {
+        return animeSiteUri;
     }
 }

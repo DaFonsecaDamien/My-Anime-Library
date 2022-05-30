@@ -7,13 +7,15 @@ public class UserManga {
     private Integer currentChapter;
     private Integer score;
     private String comment;
+    private String readSiteUri;
 
-    public UserManga(Manga manga, User user, Integer currentChapter, Integer score, String comment) {
+    public UserManga(Manga manga, User user, Integer currentChapter, Integer score, String comment, String readSiteUri) {
         this.manga = manga;
         this.user = user;
         this.currentChapter = currentChapter;
         this.score = score;
         this.comment = comment;
+        this.readSiteUri = readSiteUri;
     }
 
     public void setManga(Manga manga) {
@@ -36,6 +38,10 @@ public class UserManga {
         this.comment = comment;
     }
 
+    public void setReadSiteUri(String readSiteUri) {
+        this.readSiteUri = readSiteUri;
+    }
+
     public Manga getManga() {
         return manga;
     }
@@ -54,5 +60,9 @@ public class UserManga {
 
     public String getComment() {
         return comment;
+    }
+
+    public String getReadSiteUri() {
+        return readSiteUri;
     }
 }
