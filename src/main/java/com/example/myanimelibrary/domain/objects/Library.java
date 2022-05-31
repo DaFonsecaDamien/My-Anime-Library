@@ -1,19 +1,13 @@
-package com.example.myanimelibrary.infrastructure.entities;
+package com.example.myanimelibrary.domain.objects;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table
 public class Library implements Serializable {
 
-    @Id
     private String id;
-    @OneToOne
     private User user;
-    @OneToMany
     private List<Stack> stacks;
 
 

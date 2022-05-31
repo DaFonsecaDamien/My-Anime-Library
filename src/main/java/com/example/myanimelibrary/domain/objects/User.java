@@ -1,14 +1,7 @@
-package com.example.myanimelibrary.infrastructure.entities;
+package com.example.myanimelibrary.domain.objects;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table
 public class User {
 
-    @Id
     private String id;
     private String login;
     private String password;

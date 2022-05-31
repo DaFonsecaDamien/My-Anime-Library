@@ -1,4 +1,4 @@
-package com.example.myanimelibrary.infrastructure.entities;
+package com.example.myanimelibrary.domain.objects;
 
 import java.util.ArrayList;
 

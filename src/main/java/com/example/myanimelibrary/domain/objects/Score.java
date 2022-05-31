@@ -1,14 +1,7 @@
-package com.example.myanimelibrary.infrastructure.entities;
+package com.example.myanimelibrary.domain.objects;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table
 public class Score {
 
-    @Id
     private String id;
     private Integer value;
     private Integer nbVotes;
@@ -49,7 +42,6 @@ public class Score {
         this.percent = percent;
     }
 
-    @Id
     public String getId() {
         return id;
     }

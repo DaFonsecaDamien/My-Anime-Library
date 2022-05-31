@@ -1,21 +1,14 @@
-package com.example.myanimelibrary.infrastructure.entities;
+package com.example.myanimelibrary.domain.objects;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table
 public class Stack {
 
-    @Id
     private String id;
     private String name;
-    @OneToMany
     private List<UserMangaReview> userMangasReviews;
-    @OneToMany
     private List<UserAnimeReview> userAnimeReviews;
-    @Enumerated(EnumType.ORDINAL)
     private StackVisibility visibility;
 
     public Stack(String id, String name, ArrayList<UserMangaReview> userMangasReviews, ArrayList<UserAnimeReview> userAnimeReviews, StackVisibility visibility) {
