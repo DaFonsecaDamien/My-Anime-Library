@@ -8,10 +8,10 @@ import java.util.Objects;
 @Table
 public class UserAnimeReview implements Serializable {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @Id
-    private Anime manga;
-    @ManyToOne(fetch = FetchType.EAGER)
+    private Anime anime;
+    @ManyToOne
     @Id
     private User user;
     private Integer currentEpisode;
@@ -19,8 +19,8 @@ public class UserAnimeReview implements Serializable {
     private String comment;
     private String animeSiteUri;
 
-    public UserAnimeReview(Anime manga, User user, Integer currentEpisode, Integer score, String comment, String animeSiteUri) {
-        this.manga = manga;
+    public UserAnimeReview(Anime anime, User user, Integer currentEpisode, Integer score, String comment, String animeSiteUri) {
+        this.anime = anime;
         this.user = user;
         this.currentEpisode = currentEpisode;
         this.score = score;
@@ -32,8 +32,8 @@ public class UserAnimeReview implements Serializable {
 
     }
 
-    public void setManga(Anime manga) {
-        this.manga = manga;
+    public void setAnime(Anime anime) {
+        this.anime = anime;
     }
 
     public void setUser(User user) {
@@ -56,8 +56,8 @@ public class UserAnimeReview implements Serializable {
         this.animeSiteUri = animeSiteUri;
     }
 
-    public Anime getManga() {
-        return manga;
+    public Anime getAnime() {
+        return anime;
     }
 
     public User getUser() {
@@ -85,11 +85,11 @@ public class UserAnimeReview implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserAnimeReview that = (UserAnimeReview) o;
-        return Objects.equals(manga.getId(), that.manga.getId()) && Objects.equals(user.getId(), that.user.getId());
+        return Objects.equals(anime.getId(), that.anime.getId()) && Objects.equals(user.getId(), that.user.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manga.getId(), user.getId());
+        return Objects.hash(anime.getId(), user.getId());
     }
 }
