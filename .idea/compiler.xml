@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="MyAnimeLibrary" target="17" />
+      <module name="MyAnimeLibrary" target="16" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
