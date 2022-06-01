@@ -1,20 +1,22 @@
-package com.example.myanimelibrary.domain.objects;
+package com.example.myanimelibrary.domain;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-public class Anime {
+public class Manga {
 
     private String id;
     private Map<String, String> titles;
     private String imageUrl;
-    private Integer year;
-    private Integer episodes;
-    private String durationPerEpisodes;
-    private String studio;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private Integer chapters;
+    private Integer volumes;
+    private String author;
     private String synopsys;
     private String type;
-    private AnimeState state;
+    private MangaState state;
     private List<String> genre;
     private List<Score> scores;
     private float averageScore;

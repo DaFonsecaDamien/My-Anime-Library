@@ -1,4 +1,4 @@
-package com.example.myanimelibrary.domain.objects;
+package com.example.myanimelibrary.domain;
 
 public enum StackVisibility {
     PRIVATE, PUBLIC

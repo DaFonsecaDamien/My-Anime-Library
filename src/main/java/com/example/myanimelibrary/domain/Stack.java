@@ -1,4 +1,4 @@
-package com.example.myanimelibrary.domain.objects;
+package com.example.myanimelibrary.domain;
 
 import java.util.ArrayList;
 import java.util.List;
