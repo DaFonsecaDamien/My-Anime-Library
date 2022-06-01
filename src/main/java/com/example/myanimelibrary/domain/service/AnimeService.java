@@ -1,4 +1,4 @@
-package com.example.myanimelibrary.application.service;
+package com.example.myanimelibrary.domain.service;
 
 import org.springframework.stereotype.Service;
 
