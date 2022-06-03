@@ -22,11 +22,19 @@ public class AnimeController {
         this.animeService = animeService;
     }
 
-
-    @GetMapping("/add")
+    @GetMapping("/search")
     public String addBook() throws IOException {
         return gson.toJson(animeService.searchAnime(new HashMap<>()));
     }
+
+    @GetMapping("/{id}")
+    public Anime getAnime(@PathVariable("id") String id ){
+        return animeService.getAnimeById(id);
+    }
+
+
+
+
 
 
 }

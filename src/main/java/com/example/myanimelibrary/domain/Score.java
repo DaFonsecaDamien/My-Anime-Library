@@ -1,5 +1,9 @@
 package com.example.myanimelibrary.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class Score {
 
     private String id;
@@ -48,5 +52,19 @@ public class Score {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public static List<Score> generateDefaultScoreList(){
+        List<Score> scoreList = new ArrayList<>();
+        for( int i = 0; i < 11; i++){
+            Score score = new Score(
+                    UUID.randomUUID().toString(),
+                    i,
+                    0,
+                    0
+            );
+            scoreList.add(score);
+        }
+        return scoreList;
     }
 }

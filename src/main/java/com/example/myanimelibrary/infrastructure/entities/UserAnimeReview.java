@@ -13,7 +13,7 @@ public class UserAnimeReview implements Serializable {
 
     @ManyToOne
     @Id
-    private Anime anime;
+    private AnimeEntity animeEntity;
     @ManyToOne
     @Id
     private User user;
@@ -22,8 +22,8 @@ public class UserAnimeReview implements Serializable {
     private String comment;
     private String animeSiteUri;
 
-    public UserAnimeReview(Anime anime, User user, Integer currentEpisode, Integer score, String comment, String animeSiteUri) {
-        this.anime = anime;
+    public UserAnimeReview(AnimeEntity animeEntity, User user, Integer currentEpisode, Integer score, String comment, String animeSiteUri) {
+        this.animeEntity = animeEntity;
         this.user = user;
         this.currentEpisode = currentEpisode;
         this.score = score;
@@ -35,12 +35,12 @@ public class UserAnimeReview implements Serializable {
 
     }
 
-    public Anime getAnime() {
-        return anime;
+    public AnimeEntity getAnime() {
+        return animeEntity;
     }
 
-    public void setAnime(Anime anime) {
-        this.anime = anime;
+    public void setAnime(AnimeEntity animeEntity) {
+        this.animeEntity = animeEntity;
     }
 
     public User getUser() {
@@ -88,11 +88,11 @@ public class UserAnimeReview implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserAnimeReview that = (UserAnimeReview) o;
-        return Objects.equals(anime.getId(), that.anime.getId()) && Objects.equals(user.getId(), that.user.getId());
+        return Objects.equals(animeEntity.getId(), that.animeEntity.getId()) && Objects.equals(user.getId(), that.user.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(anime.getId(), user.getId());
+        return Objects.hash(animeEntity.getId(), user.getId());
     }
 }

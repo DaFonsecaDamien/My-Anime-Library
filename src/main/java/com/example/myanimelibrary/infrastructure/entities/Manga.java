@@ -26,7 +26,7 @@ public class Manga {
     @ElementCollection
     private List<String> genre;
     @OneToMany
-    private List<Score> scores;
+    private List<ScoreEntity> scoreEntities;
     private float averageScore;
     private Integer nbVotes;
     private Integer ranking;

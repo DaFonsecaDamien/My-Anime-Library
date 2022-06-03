@@ -1,27 +1,38 @@
-package com.example.myanimelibrary.domain;
+package com.example.myanimelibrary.infrastructure.entities;
 
+import com.example.myanimelibrary.domain.AnimeState;
+
+import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
 
-public class Anime {
+@Entity
+@Table
+public class AnimeEntity {
 
+    @Id
     private String id;
+    @ElementCollection
     private Map<String, String> titles;
     private String imageUrl;
     private Integer year;
     private Integer episodes;
     private String durationPerEpisodes;
     private String studio;
+    @Lob
     private String synopsys;
     private String type;
+    @Enumerated(EnumType.ORDINAL)
     private AnimeState state;
+    @ElementCollection
     private List<String> genre;
-    private List<Score> scores;
+    @OneToMany()
+    private List<ScoreEntity> scoreEntities;
     private float averageScore;
     private Integer nbVotes;
     private Integer ranking;
 
-    public Anime(String id, Map<String, String> titles, String imageUrl, Integer year, Integer episodes, String durationPerEpisodes, String studio, String synopsys, String type, AnimeState state, List<String> genre, List<Score> scores, float averageScore, Integer nbVotes, Integer ranking) {
+    public AnimeEntity(String id, Map<String, String> titles, String imageUrl, Integer year, Integer episodes, String durationPerEpisodes, String studio, String synopsys, String type, AnimeState state, List<String> genre, List<ScoreEntity> scoreEntities, float averageScore, Integer nbVotes, Integer ranking) {
         this.id = id;
         this.titles = titles;
         this.imageUrl = imageUrl;
@@ -33,10 +44,14 @@ public class Anime {
         this.type = type;
         this.state = state;
         this.genre = genre;
-        this.scores = scores;
+        this.scoreEntities = scoreEntities;
         this.averageScore = averageScore;
         this.nbVotes = nbVotes;
         this.ranking = ranking;
+    }
+
+    public AnimeEntity() {
+
     }
 
     public String getId() {
@@ -83,8 +98,8 @@ public class Anime {
         return genre;
     }
 
-    public List<Score> getScores() {
-        return scores;
+    public List<ScoreEntity> getScores() {
+        return scoreEntities;
     }
 
     public float getAverageScore() {

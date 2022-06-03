@@ -3,6 +3,10 @@ package com.example.myanimelibrary.infrastructure.mapper;
 import com.example.myanimelibrary.domain.APIAnime;
 import com.example.myanimelibrary.domain.Anime;
 import com.example.myanimelibrary.domain.AnimeState;
+import com.example.myanimelibrary.domain.Score;
+import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
+import com.example.myanimelibrary.infrastructure.entities.ScoreEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,8 +18,36 @@ import java.util.stream.Collectors;
 @Component
 public class AnimeMapper {
 
+    private final ScoreMapper scoreMapper;
+
+    @Autowired
+    public AnimeMapper(ScoreMapper scoreMapper) {
+        this.scoreMapper = scoreMapper;
+    }
+
     public List<Anime> FromApiToModelList(ArrayList<APIAnime.Datum> apiList){
         return apiList.stream().map(this::FromApiToModel).collect(Collectors.toList());
+    }
+
+
+
+    public Anime FromEntityToModel(AnimeEntity entity){
+        return new Anime(entity.getId(),
+                entity.getTitles(),
+                entity.getImageUrl(),
+                entity.getYear(),
+                entity.getEpisodes(),
+                entity.getDurationPerEpisodes(),
+                entity.getStudio(),
+                entity.getSynopsys(),
+                entity.getType(),
+                entity.getState(),
+                entity.getGenre(),
+                entity.getScores().stream().map(scoreMapper::FromEntityToModel).collect(Collectors.toList()),
+                entity.getAverageScore(),
+                entity.getNbVotes(),
+                entity.getRanking()
+        );
     }
 
     public Anime FromApiToModel(APIAnime.Datum apiData){
@@ -57,4 +89,6 @@ public class AnimeMapper {
         titles.put("ja", jaTitle );
         return titles;
     }
+
+
 }

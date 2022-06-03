@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Score {
+public class ScoreEntity {
 
     @Id
     private String id;
@@ -14,14 +14,14 @@ public class Score {
     private Integer nbVotes;
     private float percent;
 
-    public Score(String id, Integer value, Integer nbVotes, float percent) {
+    public ScoreEntity(String id, Integer value, Integer nbVotes, float percent) {
         this.id = id;
         this.value = value;
         this.nbVotes = nbVotes;
         this.percent = percent;
     }
 
-    public Score() {
+    public ScoreEntity() {
 
     }
 
