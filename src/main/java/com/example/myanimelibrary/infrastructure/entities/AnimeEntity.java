@@ -3,12 +3,14 @@ package com.example.myanimelibrary.infrastructure.entities;
 import com.example.myanimelibrary.domain.AnimeState;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Entity
 @Table
-public class AnimeEntity {
+public class AnimeEntity implements Serializable {
 
     @Id
     private String id;
@@ -22,17 +24,15 @@ public class AnimeEntity {
     @Lob
     private String synopsys;
     private String type;
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private AnimeState state;
     @ElementCollection
     private List<String> genre;
-    @OneToMany()
-    private List<ScoreEntity> scoreEntities;
     private float averageScore;
     private Integer nbVotes;
     private Integer ranking;
 
-    public AnimeEntity(String id, Map<String, String> titles, String imageUrl, Integer year, Integer episodes, String durationPerEpisodes, String studio, String synopsys, String type, AnimeState state, List<String> genre, List<ScoreEntity> scoreEntities, float averageScore, Integer nbVotes, Integer ranking) {
+    public AnimeEntity(String id, Map<String, String> titles, String imageUrl, Integer year, Integer episodes, String durationPerEpisodes, String studio, String synopsys, String type, AnimeState state, List<String> genre, float averageScore, Integer nbVotes, Integer ranking) {
         this.id = id;
         this.titles = titles;
         this.imageUrl = imageUrl;
@@ -44,7 +44,6 @@ public class AnimeEntity {
         this.type = type;
         this.state = state;
         this.genre = genre;
-        this.scoreEntities = scoreEntities;
         this.averageScore = averageScore;
         this.nbVotes = nbVotes;
         this.ranking = ranking;
@@ -98,10 +97,6 @@ public class AnimeEntity {
         return genre;
     }
 
-    public List<ScoreEntity> getScores() {
-        return scoreEntities;
-    }
-
     public float getAverageScore() {
         return averageScore;
     }
@@ -114,13 +109,4 @@ public class AnimeEntity {
         return ranking;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }

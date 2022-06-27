@@ -12,7 +12,7 @@ public class Library implements Serializable {
     @Id
     private String id;
     @OneToOne
-    private User user;
+    private UserEntity userEntity;
     @OneToMany
     private List<Stack> stacks;
 

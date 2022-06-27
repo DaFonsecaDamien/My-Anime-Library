@@ -2,9 +2,13 @@ package com.example.myanimelibrary.domain.service;
 
 import com.example.myanimelibrary.domain.APIAnime;
 import com.example.myanimelibrary.domain.Anime;
+import com.example.myanimelibrary.domain.Score;
 import com.example.myanimelibrary.domain.repositories.AnimeRepository;
+import com.example.myanimelibrary.domain.repositories.ScoreRepository;
+import com.example.myanimelibrary.domain.repositories.UserAnimeReviewRepository;
 import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
 import com.example.myanimelibrary.infrastructure.mapper.AnimeMapper;
+import com.example.myanimelibrary.infrastructure.request.CreateUserAnimeReviewRequest;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +27,16 @@ import java.util.Map;
 public class AnimeService {
 
     private final AnimeRepository animeRepository;
+    private final UserAnimeReviewRepository userAnimeReviewRepository;
+    private final ScoreRepository scoreRepository;
     private final AnimeMapper animeMapper;
     private final Gson gson = new Gson();
 
     @Autowired
-    public AnimeService(AnimeRepository animeRepository, AnimeMapper animeMapper) {
+    public AnimeService(AnimeRepository animeRepository, UserAnimeReviewRepository userAnimeReviewRepository, ScoreRepository scoreRepository, AnimeMapper animeMapper) {
         this.animeRepository = animeRepository;
+        this.userAnimeReviewRepository = userAnimeReviewRepository;
+        this.scoreRepository = scoreRepository;
         this.animeMapper = animeMapper;
     }
 
@@ -51,13 +59,14 @@ public class AnimeService {
 //        out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
 //        out.flush();
 //        out.close();
+
+        // check httpclient / RestTemplate
         String responseFromApi = new String(con.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
         con.disconnect();
 
         System.out.println(responseFromApi);
 
         APIAnime.Root responseGet = gson.fromJson(responseFromApi, APIAnime.Root.class);
-
         saveDataFromApi(animeMapper.FromApiToModelList(responseGet.data));
 
         return animeMapper.FromApiToModelList(responseGet.data);
@@ -67,17 +76,26 @@ public class AnimeService {
     public List<Anime> searchInDb(Map<String, String> parameters)
     {
         List<Anime> search = new ArrayList<>();
-
-
         return search;
     }
 
     public void saveDataFromApi(List<Anime> animesToSave){
         for (int i = 0; i < animesToSave.size(); i++){
             if( !animeRepository.existsAnimeEntityByTitlesContaining(animesToSave.get(i).getTitles().get(""))){
-                animeRepository.saveAnime(animesToSave.get(i));
+                Anime animeSaved = animeRepository.saveAnime(animesToSave.get(i));
+                scoreRepository.saveScoreGenerated(Score.generateDefaultScoreList(animeSaved));
             }
         }
+    }
+
+    private void saveGeneratedScoreAnime(List<Score> scoresToSave){
+        for( int i = 0; i < scoresToSave.size(); i++){
+            scoreRepository.saveScore(scoresToSave.get(i));
+        }
+    }
+
+    public void saveAnime(Anime anime){
+        animeRepository.saveAnime(anime);
     }
 
     public class ParameterStringBuilder {

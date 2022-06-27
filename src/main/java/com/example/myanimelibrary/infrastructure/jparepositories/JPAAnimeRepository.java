@@ -15,8 +15,6 @@ public interface JPAAnimeRepository extends JpaRepository<AnimeEntity, String>, 
     AnimeEntity getAnimeEntityById(String id);
     boolean existsAnimeEntityByTitlesContaining(String title);
 
-    AnimeEntity findAllBy(AnimeEntity example);
-
     @Override
     List<AnimeEntity> findAll(Specification<AnimeEntity> spec);
 

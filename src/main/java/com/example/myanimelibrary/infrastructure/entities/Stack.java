@@ -14,15 +14,15 @@ public class Stack {
     @OneToMany
     private List<UserMangaReview> userMangasReviews;
     @OneToMany
-    private List<UserAnimeReview> userAnimeReviews;
+    private List<UserAnimeReviewEntity> userAnimeReviewEntities;
     @Enumerated(EnumType.ORDINAL)
     private StackVisibility visibility;
 
-    public Stack(String id, String name, ArrayList<UserMangaReview> userMangasReviews, ArrayList<UserAnimeReview> userAnimeReviews, StackVisibility visibility) {
+    public Stack(String id, String name, ArrayList<UserMangaReview> userMangasReviews, ArrayList<UserAnimeReviewEntity> userAnimeReviewEntities, StackVisibility visibility) {
         this.id = id;
         this.name = name;
         this.userMangasReviews = userMangasReviews;
-        this.userAnimeReviews = userAnimeReviews;
+        this.userAnimeReviewEntities = userAnimeReviewEntities;
         this.visibility = visibility;
     }
 
@@ -54,12 +54,12 @@ public class Stack {
         this.userMangasReviews = userMangasReviews;
     }
 
-    public List<UserAnimeReview> getUserAnimes() {
-        return userAnimeReviews;
+    public List<UserAnimeReviewEntity> getUserAnimes() {
+        return userAnimeReviewEntities;
     }
 
-    public void setUserAnimes(ArrayList<UserAnimeReview> userAnimeReviews) {
-        this.userAnimeReviews = userAnimeReviews;
+    public void setUserAnimes(ArrayList<UserAnimeReviewEntity> userAnimeReviewEntities) {
+        this.userAnimeReviewEntities = userAnimeReviewEntities;
     }
 
     public StackVisibility getVisibility() {

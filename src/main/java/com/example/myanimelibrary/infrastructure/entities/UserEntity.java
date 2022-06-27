@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class User {
+public class UserEntity {
 
     @Id
     private String id;
@@ -14,14 +14,16 @@ public class User {
     private String password;
     private String pseudo;
 
-    public User(String id, String login, String password, String pseudo) {
+
+
+    public UserEntity(String id, String login, String password, String pseudo) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.pseudo = pseudo;
     }
 
-    public User() {
+    public UserEntity() {
 
     }
 
@@ -57,13 +59,4 @@ public class User {
         this.pseudo = pseudo;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }

@@ -6,6 +6,7 @@ import com.example.myanimelibrary.domain.SearchFilter;
 import com.example.myanimelibrary.domain.repositories.AnimeRepository;
 import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
 import com.example.myanimelibrary.infrastructure.jparepositories.JPAAnimeRepository;
+import com.example.myanimelibrary.infrastructure.jparepositories.JPAScoreRepository;
 import com.example.myanimelibrary.infrastructure.mapper.AnimeMapper;
 import com.example.myanimelibrary.infrastructure.mapper.ScoreMapper;
 import com.example.myanimelibrary.infrastructure.mapper.SpecificationMapper;
@@ -27,12 +28,14 @@ import java.util.stream.Collectors;
 public class AnimeRepositoryInfra implements AnimeRepository {
 
     private final JPAAnimeRepository jpaAnimeRepository;
+    private final ScoreRepositoryInfra scoreRepositoryInfra;
     private final AnimeMapper animeMapper;
     private final ScoreMapper scoreMapper;
 
     @Autowired
-    public AnimeRepositoryInfra(JPAAnimeRepository jpaAnimeRepository, AnimeMapper animeMapper, ScoreMapper scoreMapper) {
+    public AnimeRepositoryInfra(JPAAnimeRepository jpaAnimeRepository, ScoreRepositoryInfra scoreRepositoryInfra, AnimeMapper animeMapper, ScoreMapper scoreMapper) {
         this.jpaAnimeRepository = jpaAnimeRepository;
+        this.scoreRepositoryInfra = scoreRepositoryInfra;
         this.animeMapper = animeMapper;
         this.scoreMapper = scoreMapper;
     }
@@ -48,9 +51,10 @@ public class AnimeRepositoryInfra implements AnimeRepository {
     }
 
     @Override
-    public void saveAnime(Anime anime) {
-        jpaAnimeRepository.save(new AnimeEntity(
-                UUID.randomUUID().toString(),
+    public Anime saveAnime(Anime anime) {
+        System.out.println(anime.getId() + "//////////////");
+        AnimeEntity animeToSave = new AnimeEntity(
+                anime.getId() == null ? UUID.randomUUID().toString() : anime.getId(),
                 anime.getTitles(),
                 anime.getImageUrl(),
                 anime.getYear(),
@@ -61,11 +65,12 @@ public class AnimeRepositoryInfra implements AnimeRepository {
                 anime.getType(),
                 anime.getState(),
                 anime.getGenre(),
-                Score.generateDefaultScoreList().stream().map(scoreMapper::FromModelToEntity).collect(Collectors.toList()),
                 anime.getAverageScore(),
                 anime.getNbVotes(),
                 anime.getRanking()
-        ));
+        );
+        jpaAnimeRepository.save(animeToSave);
+        return animeMapper.FromEntityToModel(animeToSave);
     }
 
     @Override

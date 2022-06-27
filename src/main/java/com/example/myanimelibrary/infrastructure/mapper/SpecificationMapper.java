@@ -4,10 +4,12 @@ import com.example.myanimelibrary.domain.SearchFilter;
 import com.example.myanimelibrary.domain.FilterOperationMode;
 import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class SpecificationMapper {
 
     public static Specification<AnimeEntity> FromSearchFilterToSpecification(List<SearchFilter> searchFilters){

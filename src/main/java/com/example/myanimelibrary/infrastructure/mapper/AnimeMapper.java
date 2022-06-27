@@ -29,7 +29,23 @@ public class AnimeMapper {
         return apiList.stream().map(this::FromApiToModel).collect(Collectors.toList());
     }
 
-
+    public AnimeEntity FromModelToEntity(Anime model){
+        return new AnimeEntity(model.getId(),
+                model.getTitles(),
+                model.getImageUrl(),
+                model.getYear(),
+                model.getEpisodes(),
+                model.getDurationPerEpisodes(),
+                model.getStudio(),
+                model.getSynopsys(),
+                model.getType(),
+                model.getState(),
+                model.getGenre(),
+                model.getAverageScore(),
+                model.getNbVotes(),
+                model.getRanking()
+        );
+    }
 
     public Anime FromEntityToModel(AnimeEntity entity){
         return new Anime(entity.getId(),
@@ -43,15 +59,13 @@ public class AnimeMapper {
                 entity.getType(),
                 entity.getState(),
                 entity.getGenre(),
-                entity.getScores().stream().map(scoreMapper::FromEntityToModel).collect(Collectors.toList()),
                 entity.getAverageScore(),
                 entity.getNbVotes(),
                 entity.getRanking()
         );
     }
-
+// couche anti corruption
     public Anime FromApiToModel(APIAnime.Datum apiData){
-
         return new Anime((String) null,
                 getAnimeTitleFromApiData(apiData.title, apiData.title_english, apiData.title_japanese),
                 apiData.images.jpg.image_url,
@@ -63,7 +77,6 @@ public class AnimeMapper {
                 apiData.demographics.size() == 0 ? "" : apiData.demographics.get(0).name,
                 getAnimeStateFromApiData(apiData),
                 getGenreFromApiData(apiData),
-                null,
                 0,
                 0,
                 0

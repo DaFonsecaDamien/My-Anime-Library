@@ -11,15 +11,26 @@ public class Score {
     private Integer nbVotes;
     private float percent;
 
-    public Score(String id, Integer value, Integer nbVotes, float percent) {
+    private Anime anime;
+
+    public Score(String id, Integer value, Integer nbVotes, float percent, Anime anime) {
         this.id = id;
         this.value = value;
         this.nbVotes = nbVotes;
         this.percent = percent;
+        this.anime = anime;
     }
 
     public Score() {
 
+    }
+
+    public void setAnime(Anime anime) {
+        this.anime = anime;
+    }
+
+    public Anime getAnime() {
+        return anime;
     }
 
     public Integer getValue() {
@@ -54,14 +65,15 @@ public class Score {
         this.id = id;
     }
 
-    public static List<Score> generateDefaultScoreList(){
+    public static List<Score> generateDefaultScoreList(Anime anime){
         List<Score> scoreList = new ArrayList<>();
         for( int i = 0; i < 11; i++){
             Score score = new Score(
                     UUID.randomUUID().toString(),
                     i,
                     0,
-                    0
+                    0,
+                    anime
             );
             scoreList.add(score);
         }

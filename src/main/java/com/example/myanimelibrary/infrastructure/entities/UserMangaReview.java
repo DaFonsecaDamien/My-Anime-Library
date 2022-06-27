@@ -16,17 +16,15 @@ public class UserMangaReview implements Serializable {
     private Manga manga;
     @ManyToOne
     @Id
-    private User user;
-
-
+    private UserEntity userEntity;
     private Integer currentChapter;
     private Integer score;
     private String comment;
     private String readSiteUri;
 
-    public UserMangaReview(Manga manga, User user, Integer currentChapter, Integer score, String comment, String readSiteUri) {
+    public UserMangaReview(Manga manga, UserEntity userEntity, Integer currentChapter, Integer score, String comment, String readSiteUri) {
         this.manga = manga;
-        this.user = user;
+        this.userEntity = userEntity;
         this.currentChapter = currentChapter;
         this.score = score;
         this.comment = comment;
@@ -45,12 +43,12 @@ public class UserMangaReview implements Serializable {
         this.manga = manga;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUser() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     public Integer getCurrentChapter() {
@@ -90,11 +88,11 @@ public class UserMangaReview implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserMangaReview that = (UserMangaReview) o;
-        return Objects.equals(manga.getId(), that.manga.getId()) && Objects.equals(user.getId(), that.user.getId());
+        return Objects.equals(manga, that.manga) && Objects.equals(userEntity, that.userEntity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manga.getId(), user.getId());
+        return Objects.hash(manga, userEntity);
     }
 }
