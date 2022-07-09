@@ -1,4 +1,4 @@
-package com.example.myanimelibrary.application.controller;
+package com.example.myanimelibrary.infrastructure.web.controller;
 
 import com.example.myanimelibrary.domain.Anime;
 import com.example.myanimelibrary.domain.Score;
@@ -8,12 +8,13 @@ import com.example.myanimelibrary.domain.service.ScoreService;
 import com.example.myanimelibrary.domain.service.UserAnimeReviewService;
 import com.example.myanimelibrary.infrastructure.request.UpdateUserAnimeReviewRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/animeReview")
+@RequestMapping("/animeList/animeReview")
 public class UserAnimeReviewController {
 
     private final UserAnimeReviewService userAnimeReviewService;
@@ -28,17 +29,17 @@ public class UserAnimeReviewController {
     }
 
     @PutMapping("/{id}/update")
-    public void createUserAnimeReview(@PathVariable("id") String id, @RequestBody UpdateUserAnimeReviewRequest request){
+    public void updateUserAnimeReview(@PathVariable("id") Long id, @RequestBody UpdateUserAnimeReviewRequest request){
         userAnimeReviewService.updateAnimeReview(id, request);
     }
 
     @GetMapping("/getReviewByAnime")
-    public List<UserAnimeReview> getReviewByAnime(@RequestParam("id") String idAnime){
-        return userAnimeReviewService.getAllByAnimeId(idAnime);
+    public ResponseEntity<List<UserAnimeReview>> getReviewByAnime(@RequestParam("id") Long idAnime){
+        return ResponseEntity.ok(userAnimeReviewService.getAllByAnimeId(idAnime));
     }
 
     @DeleteMapping("/{id}/delete")
-    public void deleteUserAnimeReview(@PathVariable("id") String id){
+    public void deleteUserAnimeReview(@PathVariable("id") Long id){
         UserAnimeReview userAnimeReview = userAnimeReviewService.getById(id);
         userAnimeReviewService.deleteById(id);
         Score score = scoreService.getScoreByAnimeAndValue(userAnimeReview.getScore(), userAnimeReview.getAnime());
@@ -48,5 +49,10 @@ public class UserAnimeReviewController {
         List<Score> scores = scoreService.getAllscoreFromAnime(animeToUpdate);
         animeToUpdate.makeAverage(scores);
         animeService.saveAnime(animeToUpdate);
+    }
+
+    @GetMapping("/myReviews")
+    public ResponseEntity<List<UserAnimeReview>> getAllAnimeReviewByUserId(@RequestParam("user") Long id){
+        return ResponseEntity.ok(userAnimeReviewService.getAllAnimeReviewByUserId(id));
     }
 }

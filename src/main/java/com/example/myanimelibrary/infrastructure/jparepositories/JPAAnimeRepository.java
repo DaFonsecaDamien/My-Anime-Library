@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface JPAAnimeRepository extends JpaRepository<AnimeEntity, String>, JpaSpecificationExecutor<AnimeEntity> {
+public interface JPAAnimeRepository extends JpaRepository<AnimeEntity, Long>, JpaSpecificationExecutor<AnimeEntity> {
 
     AnimeEntity findByTitlesContains(String title);
-    AnimeEntity getAnimeEntityById(String id);
+    AnimeEntity getAnimeEntityById(Long id);
     boolean existsAnimeEntityByTitlesContaining(String title);
 
     @Override

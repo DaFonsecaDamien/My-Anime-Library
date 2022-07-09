@@ -2,7 +2,6 @@ package com.example.myanimelibrary.domain.repositories;
 
 import com.example.myanimelibrary.domain.Anime;
 import com.example.myanimelibrary.domain.Score;
-import com.example.myanimelibrary.infrastructure.entities.ScoreEntity;
 
 import java.util.List;
 

@@ -1,14 +1,11 @@
 package com.example.myanimelibrary.infrastructure.mapper;
 
 import com.example.myanimelibrary.TMP.user.Constants;
-import com.example.myanimelibrary.domain.User;
 import com.example.myanimelibrary.domain.UserAnimeReview;
 import com.example.myanimelibrary.infrastructure.entities.UserAnimeReviewEntity;
 import com.example.myanimelibrary.infrastructure.request.CreateUserAnimeReviewRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 @Component
 public class UserAnimeReviewMapper {
@@ -47,7 +44,7 @@ public class UserAnimeReviewMapper {
 
     public UserAnimeReview FromRequestToModel(CreateUserAnimeReviewRequest request){
         return new UserAnimeReview(
-                UUID.randomUUID().toString(),
+                null,
                 request.getAnime(),
                 Constants.fakeUser,
                 request.getCurrentEpisode(),

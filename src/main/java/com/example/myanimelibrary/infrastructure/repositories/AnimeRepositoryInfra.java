@@ -1,26 +1,19 @@
 package com.example.myanimelibrary.infrastructure.repositories;
 
 import com.example.myanimelibrary.domain.Anime;
-import com.example.myanimelibrary.domain.Score;
 import com.example.myanimelibrary.domain.SearchFilter;
 import com.example.myanimelibrary.domain.repositories.AnimeRepository;
 import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
+import com.example.myanimelibrary.infrastructure.exception.ResourceNotFoundException;
 import com.example.myanimelibrary.infrastructure.jparepositories.JPAAnimeRepository;
-import com.example.myanimelibrary.infrastructure.jparepositories.JPAScoreRepository;
 import com.example.myanimelibrary.infrastructure.mapper.AnimeMapper;
 import com.example.myanimelibrary.infrastructure.mapper.ScoreMapper;
 import com.example.myanimelibrary.infrastructure.mapper.SpecificationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -41,20 +34,77 @@ public class AnimeRepositoryInfra implements AnimeRepository {
     }
 
     @Override
-    public List<AnimeEntity> findByParameters(List<SearchFilter> filters) {
-        return jpaAnimeRepository.findAll(SpecificationMapper.FromSearchFilterToSpecification(filters));
+    public List<Anime> findByFilters(List<SearchFilter> filters) {
+        List<SearchFilter> postQueryFilters = new ArrayList<>();
+        List<SearchFilter> filteredFilters = new ArrayList<>();
+        List<String> postQueryFiltersField = Arrays.asList("title", "genre");
+        for (SearchFilter filter : filters){
+                if( !Collections.disjoint(Collections.singletonList(filter.getField()), postQueryFiltersField)){
+                    postQueryFilters.add(filter);
+                } else {
+                    filteredFilters.add(filter);
+                }
+
+        }
+        List<AnimeEntity> animeEntities = new ArrayList<>();
+        if( filteredFilters.size() > 0) {
+            animeEntities = jpaAnimeRepository.findAll(SpecificationMapper.FromSearchFilterToSpecification(filteredFilters));
+        }
+        List<AnimeEntity> animeEntitiesPostFiltered = getAnimeEntityByApplyingPostFilters(postQueryFilters, animeEntities);
+
+        return animeEntitiesPostFiltered.stream().map(animeMapper::FromEntityToModel).collect(Collectors.toList());
+    }
+
+    private List<AnimeEntity> getAnimeEntityByApplyingPostFilters(List<SearchFilter> filters, List<AnimeEntity> animeEntities){
+        List<AnimeEntity> filteredAnimeEntities = new ArrayList<>();
+        for (int j = 0; j< filters.size(); j++){
+            for (int i = 0 ; i < animeEntities.size(); i++){
+                if (filters.get(j).getField().equals("title") ){
+                    if( animeEntities.get(i).getTitles().get("") != null &&
+                            animeEntities.get(i).getTitles().get("").matches("(?i).*" + filters.get(j).getValue() + ".*" )) {
+                        filteredAnimeEntities.add(animeEntities.get(i));
+                        continue;
+                    }
+                    if( animeEntities.get(i).getTitles().get("ja") != null &&
+                            animeEntities.get(i).getTitles().get("ja").matches("(?i).*" + filters.get(j).getValue() + ".*" )) {
+                        filteredAnimeEntities.add(animeEntities.get(i));
+                        continue;
+                    }
+                    if( animeEntities.get(i).getTitles().get("en") != null &&
+                            animeEntities.get(i).getTitles().get("en").matches("(?i).*" + filters.get(j).getValue() + ".*" )) {
+                        filteredAnimeEntities.add(animeEntities.get(i));
+                        continue;
+                    }
+                }
+                if (filters.get(j).getField().equals("genre")){
+                    if(!Collections.disjoint( filters.get(j).getValues(), animeEntities.get(i).getGenre())){
+                        filteredAnimeEntities.add(animeEntities.get(i));
+                    }
+                }
+            }
+            if( j == filters.size()-1 ){
+                break;
+            }
+            animeEntities = new ArrayList<>(filteredAnimeEntities);
+            filteredAnimeEntities = new ArrayList<>();
+        }
+        return filteredAnimeEntities;
     }
 
     @Override
-    public AnimeEntity getAnimeById(String id) {
-        return jpaAnimeRepository.getAnimeEntityById(id);
+    public Anime getAnimeById(Long id) {
+        Optional<AnimeEntity> animeEntityOptional = jpaAnimeRepository.findById(id);
+        if( animeEntityOptional.isEmpty()){
+            throw new ResourceNotFoundException("Element not found");
+        }
+        return animeMapper.FromEntityToModel(jpaAnimeRepository.getAnimeEntityById(id));
     }
 
     @Override
     public Anime saveAnime(Anime anime) {
-        System.out.println(anime.getId() + "//////////////");
+        System.out.println(anime.getId() + ".//////////////");
         AnimeEntity animeToSave = new AnimeEntity(
-                anime.getId() == null ? UUID.randomUUID().toString() : anime.getId(),
+                anime.getId() == null ? null : anime.getId(),
                 anime.getTitles(),
                 anime.getImageUrl(),
                 anime.getYear(),
@@ -74,8 +124,8 @@ public class AnimeRepositoryInfra implements AnimeRepository {
     }
 
     @Override
-    public AnimeEntity findByTitlesContains(String title) {
-        return jpaAnimeRepository.findByTitlesContains(title);
+    public Anime findByTitlesContains(String title) {
+        return animeMapper.FromEntityToModel(jpaAnimeRepository.findByTitlesContains(title));
     }
 
     @Override

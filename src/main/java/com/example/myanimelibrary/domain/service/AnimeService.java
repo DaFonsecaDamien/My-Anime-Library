@@ -6,16 +6,14 @@ import com.example.myanimelibrary.domain.Score;
 import com.example.myanimelibrary.domain.repositories.AnimeRepository;
 import com.example.myanimelibrary.domain.repositories.ScoreRepository;
 import com.example.myanimelibrary.domain.repositories.UserAnimeReviewRepository;
-import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
 import com.example.myanimelibrary.infrastructure.mapper.AnimeMapper;
-import com.example.myanimelibrary.infrastructure.request.CreateUserAnimeReviewRequest;
+import com.example.myanimelibrary.infrastructure.mapper.SpecificationMapper;
+import com.example.myanimelibrary.infrastructure.request.SearchAnimeRequest;
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -23,43 +21,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Service
 public class AnimeService {
 
     private final AnimeRepository animeRepository;
     private final UserAnimeReviewRepository userAnimeReviewRepository;
     private final ScoreRepository scoreRepository;
     private final AnimeMapper animeMapper;
+    private final SpecificationMapper specificationMapper;
     private final Gson gson = new Gson();
 
-    @Autowired
-    public AnimeService(AnimeRepository animeRepository, UserAnimeReviewRepository userAnimeReviewRepository, ScoreRepository scoreRepository, AnimeMapper animeMapper) {
+    public AnimeService(AnimeRepository animeRepository, UserAnimeReviewRepository userAnimeReviewRepository, ScoreRepository scoreRepository, AnimeMapper animeMapper, SpecificationMapper specificationMapper) {
         this.animeRepository = animeRepository;
         this.userAnimeReviewRepository = userAnimeReviewRepository;
         this.scoreRepository = scoreRepository;
         this.animeMapper = animeMapper;
+        this.specificationMapper = specificationMapper;
     }
 
-    public Anime getAnimeById(String id){
-        return animeMapper.FromEntityToModel(animeRepository.getAnimeById(id));
+    public Anime getAnimeById(Long id){
+        return animeRepository.getAnimeById(id);
     }
 
-    public List<Anime> searchAnime(Map<String, String> parameters) throws IOException {
+    public List<Anime> searchAnime(SearchAnimeRequest request) throws IOException {
 
+        List<Anime> response = searchInDb(request);
+        if( response.size() == 0 ){
 
+            String apiUrl = animeMapper.searchAnimeRequestTuApiUrl(request);
+            response = animeMapper.FromApiToModelList(searchInApi(apiUrl).data);
+            System.out.println("url : " + animeMapper.searchAnimeRequestTuApiUrl(request));
+        }
 
-        ArrayList<Anime> response = new ArrayList<>();
+        return response;
+    }
 
-        URL url = new URL("https://api.jikan.moe/v4/anime?q=naruto");
+    private APIAnime.Root searchInApi(String apiUrl) throws IOException {
+        URL url = new URL(apiUrl);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
-//        con.setDoOutput(true);
-
-//        DataOutputStream out = new DataOutputStream(con.getOutputStream());
-//        out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
-//        out.flush();
-//        out.close();
-
         // check httpclient / RestTemplate
         String responseFromApi = new String(con.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
         con.disconnect();
@@ -68,24 +67,25 @@ public class AnimeService {
 
         APIAnime.Root responseGet = gson.fromJson(responseFromApi, APIAnime.Root.class);
         saveDataFromApi(animeMapper.FromApiToModelList(responseGet.data));
-
-        return animeMapper.FromApiToModelList(responseGet.data);
-
+        return responseGet;
     }
 
-    public List<Anime> searchInDb(Map<String, String> parameters)
+    public List<Anime> searchInDb(SearchAnimeRequest request)
     {
-        List<Anime> search = new ArrayList<>();
-        return search;
+        //Specification<AnimeEntity> animeEntitySpecification = specificationMapper.FromSearchFilterToSpecification(request.getFilters());
+        return animeRepository.findByFilters(request.getFilters());
     }
 
-    public void saveDataFromApi(List<Anime> animesToSave){
+    public List<Anime> saveDataFromApi(List<Anime> animesToSave){
+        List<Anime> savedAnime = new ArrayList<>();
         for (int i = 0; i < animesToSave.size(); i++){
             if( !animeRepository.existsAnimeEntityByTitlesContaining(animesToSave.get(i).getTitles().get(""))){
                 Anime animeSaved = animeRepository.saveAnime(animesToSave.get(i));
+                savedAnime.add(animeSaved);
                 scoreRepository.saveScoreGenerated(Score.generateDefaultScoreList(animeSaved));
             }
         }
+        return savedAnime;
     }
 
     private void saveGeneratedScoreAnime(List<Score> scoresToSave){

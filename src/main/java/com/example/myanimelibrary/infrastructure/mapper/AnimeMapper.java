@@ -3,9 +3,9 @@ package com.example.myanimelibrary.infrastructure.mapper;
 import com.example.myanimelibrary.domain.APIAnime;
 import com.example.myanimelibrary.domain.Anime;
 import com.example.myanimelibrary.domain.AnimeState;
-import com.example.myanimelibrary.domain.Score;
+import com.example.myanimelibrary.domain.SearchFilter;
 import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
-import com.example.myanimelibrary.infrastructure.entities.ScoreEntity;
+import com.example.myanimelibrary.infrastructure.request.SearchAnimeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -66,7 +66,7 @@ public class AnimeMapper {
     }
 // couche anti corruption
     public Anime FromApiToModel(APIAnime.Datum apiData){
-        return new Anime((String) null,
+        return new Anime(null,
                 getAnimeTitleFromApiData(apiData.title, apiData.title_english, apiData.title_japanese),
                 apiData.images.jpg.image_url,
                 apiData.year,
@@ -101,6 +101,41 @@ public class AnimeMapper {
         titles.put("en", enTitle );
         titles.put("ja", jaTitle );
         return titles;
+    }
+
+    public String searchAnimeRequestTuApiUrl(SearchAnimeRequest request){
+        String baseApiUrl = "https://api.jikan.moe/v4/anime?";
+        List<SearchFilter> filters = request.getFilters();
+        for (int j = 0; j < filters.size(); j++)
+        {
+            switch (filters.get(j).getField()){
+                case "genre" :
+                    baseApiUrl += "genres=";
+                    // get api genre id https://api.jikan.moe/v4/genres/anime load genre as config
+                    for( int i = 0; i < filters.get(j).getValues().size(); i++){
+                        if( i == filters.get(j).getValues().size()-1 ){
+                            baseApiUrl += filters.get(j).getValues().get(i) + "&";
+                            break;
+                        }
+                        baseApiUrl += filters.get(j).getValues().get(i) + ",";
+                    };
+                    break;
+                case "title" :
+                    baseApiUrl += "q=" + filters.get(j).getValue() + "&";
+                    break;
+                case "score" :
+                    baseApiUrl += "score=" + filters.get(j).getValue() + "&";
+                    break;
+                case "status" :
+                    baseApiUrl += "status=" + filters.get(j).getValue() + "&";
+                    break;
+                case "year" :
+                    baseApiUrl += "start_date=" + filters.get(j).getValue() + "&";
+                    break;
+                default: break;
+            }
+        }
+        return baseApiUrl;
     }
 
 

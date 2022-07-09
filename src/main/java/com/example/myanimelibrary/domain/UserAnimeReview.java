@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class UserAnimeReview implements Serializable {
 
-    private String id;
+    private Long id;
     private Anime anime;
     private User user;
     private Integer currentEpisode;
@@ -13,7 +13,7 @@ public class UserAnimeReview implements Serializable {
     private String comment;
     private String animeSiteUri;
 
-    public UserAnimeReview(String id, Anime anime, User user, Integer currentEpisode, Integer score, String comment, String animeSiteUri) {
+    public UserAnimeReview(Long id, Anime anime, User user, Integer currentEpisode, Integer score, String comment, String animeSiteUri) {
         this.id = id;
         this.anime = anime;
         this.user = user;
@@ -23,16 +23,12 @@ public class UserAnimeReview implements Serializable {
         this.animeSiteUri = animeSiteUri;
     }
 
-    public UserAnimeReview() {
-
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Anime getAnime() {

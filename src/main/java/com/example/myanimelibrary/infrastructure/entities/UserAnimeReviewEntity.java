@@ -1,7 +1,6 @@
 package com.example.myanimelibrary.infrastructure.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -9,10 +8,11 @@ import java.util.Objects;
 public class UserAnimeReviewEntity {
 
     @Id
-    private String id;
-    @ManyToOne
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
     private AnimeEntity animeEntity;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity userEntity;
     private Integer currentEpisode;
     private Integer score;
@@ -23,7 +23,7 @@ public class UserAnimeReviewEntity {
 
     }
 
-    public UserAnimeReviewEntity(String id, AnimeEntity animeEntity, UserEntity userEntity, Integer currentEpisode, Integer score, String comment, String animeSiteUri) {
+    public UserAnimeReviewEntity(Long id, AnimeEntity animeEntity, UserEntity userEntity, Integer currentEpisode, Integer score, String comment, String animeSiteUri) {
         this.id = id;
         this.animeEntity = animeEntity;
         this.userEntity = userEntity;
@@ -33,60 +33,60 @@ public class UserAnimeReviewEntity {
         this.animeSiteUri = animeSiteUri;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setAnimeEntity(AnimeEntity animeEntity) {
-        this.animeEntity = animeEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
-    public void setCurrentEpisode(Integer currentEpisode) {
-        this.currentEpisode = currentEpisode;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public void setAnimeSiteUri(String animeSiteUri) {
-        this.animeSiteUri = animeSiteUri;
-    }
-
-    public String getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public AnimeEntity getAnimeEntity() {
         return animeEntity;
     }
 
+    public void setAnimeEntity(AnimeEntity animeEntity) {
+        this.animeEntity = animeEntity;
+    }
+
     public UserEntity getUserEntity() {
         return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     public Integer getCurrentEpisode() {
         return currentEpisode;
     }
 
+    public void setCurrentEpisode(Integer currentEpisode) {
+        this.currentEpisode = currentEpisode;
+    }
+
     public Integer getScore() {
         return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public String getComment() {
         return comment;
     }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public String getAnimeSiteUri() {
         return animeSiteUri;
+    }
+
+    public void setAnimeSiteUri(String animeSiteUri) {
+        this.animeSiteUri = animeSiteUri;
     }
 
     @Override

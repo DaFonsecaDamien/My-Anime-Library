@@ -1,23 +1,21 @@
 package com.example.myanimelibrary.domain.repositories;
 
+import com.example.myanimelibrary.domain.Anime;
 import com.example.myanimelibrary.domain.UserAnimeReview;
-import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
-import com.example.myanimelibrary.infrastructure.entities.UserAnimeReviewEntity;
-import com.example.myanimelibrary.infrastructure.request.CreateUserAnimeReviewRequest;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface UserAnimeReviewRepository {
 
-    void saveUserAnimeReview(UserAnimeReview review);
+    UserAnimeReview saveUserAnimeReview(UserAnimeReview review);
 
-    UserAnimeReview getUserReviewAnimeEntityById(String id);
+    UserAnimeReview getUserReviewAnimeEntityById(Long id);
 
-    void deleteUserAnimeReviewById(String id);
+    void deleteUserAnimeReviewById(Long id);
 
-    List<UserAnimeReviewEntity> getUserReviewAnimeEntityByAnime(AnimeEntity anime);
+    List<UserAnimeReview> getUserReviewAnimeEntityByAnime(Anime anime);
+
+    List<UserAnimeReview> getAllUserAnimeReviewByUserId(Long userId);
 
 
 }

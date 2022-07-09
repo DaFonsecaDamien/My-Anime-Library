@@ -1,7 +1,6 @@
 package com.example.myanimelibrary.infrastructure.mapper;
 
 import com.example.myanimelibrary.domain.SearchFilter;
-import com.example.myanimelibrary.domain.FilterOperationMode;
 import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;

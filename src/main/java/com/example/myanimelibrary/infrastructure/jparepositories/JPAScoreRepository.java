@@ -1,13 +1,14 @@
 package com.example.myanimelibrary.infrastructure.jparepositories;
 
-import com.example.myanimelibrary.domain.Anime;
 import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
 import com.example.myanimelibrary.infrastructure.entities.ScoreEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface JPAScoreRepository extends JpaRepository<ScoreEntity, String> {
+@Repository
+public interface JPAScoreRepository extends JpaRepository<ScoreEntity, Long> {
 
     ScoreEntity getByAnimeEntityAndValue(AnimeEntity animeEntity, Integer value);
 

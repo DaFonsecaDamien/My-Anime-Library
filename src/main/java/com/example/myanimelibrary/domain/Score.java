@@ -2,18 +2,17 @@ package com.example.myanimelibrary.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Score {
 
-    private String id;
+    private Long id;
     private Integer value;
     private Integer nbVotes;
     private float percent;
 
     private Anime anime;
 
-    public Score(String id, Integer value, Integer nbVotes, float percent, Anime anime) {
+    public Score(Long id, Integer value, Integer nbVotes, float percent, Anime anime) {
         this.id = id;
         this.value = value;
         this.nbVotes = nbVotes;
@@ -21,16 +20,12 @@ public class Score {
         this.anime = anime;
     }
 
-    public Score() {
-
+    public Long getId() {
+        return id;
     }
 
-    public void setAnime(Anime anime) {
-        this.anime = anime;
-    }
-
-    public Anime getAnime() {
-        return anime;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getValue() {
@@ -57,19 +52,19 @@ public class Score {
         this.percent = percent;
     }
 
-    public String getId() {
-        return id;
+    public Anime getAnime() {
+        return anime;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAnime(Anime anime) {
+        this.anime = anime;
     }
 
     public static List<Score> generateDefaultScoreList(Anime anime){
         List<Score> scoreList = new ArrayList<>();
         for( int i = 0; i < 11; i++){
             Score score = new Score(
-                    UUID.randomUUID().toString(),
+                    null,
                     i,
                     0,
                     0,

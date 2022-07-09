@@ -2,11 +2,7 @@ package com.example.myanimelibrary.infrastructure.request;
 
 import com.example.myanimelibrary.domain.Anime;
 import com.example.myanimelibrary.domain.User;
-import com.example.myanimelibrary.infrastructure.entities.AnimeEntity;
-import com.example.myanimelibrary.infrastructure.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.ManyToOne;
 
 public class CreateUserAnimeReviewRequest {
 

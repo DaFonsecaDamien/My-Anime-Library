@@ -2,27 +2,23 @@ package com.example.myanimelibrary.domain;
 
 public class User {
 
-    private String id;
+    private Long id;
     private String login;
     private String password;
     private String pseudo;
 
-    public User(String id, String login, String password, String pseudo) {
+    public User(Long id, String login, String password, String pseudo) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.pseudo = pseudo;
     }
 
-    public User() {
-
-    }
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,7 +1,6 @@
 package com.example.myanimelibrary.infrastructure.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -9,8 +8,9 @@ import java.util.Objects;
 public class ScoreEntity {
 
     @Id
-    private String id;
-    @ManyToOne
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
     private AnimeEntity animeEntity;
     private Integer value;
     private Integer nbVotes;
@@ -20,20 +20,28 @@ public class ScoreEntity {
 
     }
 
-    public ScoreEntity(String id, Integer value, Integer nbVotes, float percent, AnimeEntity animeEntity) {
+    public ScoreEntity(Long id, AnimeEntity animeEntity, Integer value, Integer nbVotes, float percent) {
         this.id = id;
+        this.animeEntity = animeEntity;
         this.value = value;
         this.nbVotes = nbVotes;
         this.percent = percent;
-        this.animeEntity = animeEntity;
     }
 
-    public void setAnime(AnimeEntity animeEntity) {
-        this.animeEntity = animeEntity;
+    public Long getId() {
+        return id;
     }
 
-    public AnimeEntity getAnime() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public AnimeEntity getAnimeEntity() {
         return animeEntity;
+    }
+
+    public void setAnimeEntity(AnimeEntity animeEntity) {
+        this.animeEntity = animeEntity;
     }
 
     public Integer getValue() {
@@ -58,14 +66,6 @@ public class ScoreEntity {
 
     public void setPercent(float percent) {
         this.percent = percent;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     @Override

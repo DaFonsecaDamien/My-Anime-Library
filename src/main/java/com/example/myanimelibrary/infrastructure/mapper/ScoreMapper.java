@@ -19,10 +19,10 @@ public class ScoreMapper {
     public ScoreEntity FromModelToEntity(Score score){
         return new ScoreEntity(
                 score.getId(),
+                animeMapper.FromModelToEntity(score.getAnime()),
                 score.getValue(),
                 score.getNbVotes(),
-                score.getPercent(),
-                animeMapper.FromModelToEntity(score.getAnime())
+                score.getPercent()
         );
     }
 
@@ -32,6 +32,6 @@ public class ScoreMapper {
                 scoreEntity.getValue(),
                 scoreEntity.getNbVotes(),
                 scoreEntity.getPercent(),
-                animeMapper.FromEntityToModel(scoreEntity.getAnime()));
+                animeMapper.FromEntityToModel(scoreEntity.getAnimeEntity()));
     }
 }

@@ -1,37 +1,33 @@
 package com.example.myanimelibrary.infrastructure.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class UserEntity {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String login;
     private String password;
     private String pseudo;
 
+    public UserEntity() {
+    }
 
-
-    public UserEntity(String id, String login, String password, String pseudo) {
+    public UserEntity(Long id, String login, String password, String pseudo) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.pseudo = pseudo;
     }
 
-    public UserEntity() {
-
-    }
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -58,5 +54,4 @@ public class UserEntity {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
-
 }

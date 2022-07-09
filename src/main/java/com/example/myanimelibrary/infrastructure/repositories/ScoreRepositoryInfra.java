@@ -7,7 +7,6 @@ import com.example.myanimelibrary.infrastructure.entities.ScoreEntity;
 import com.example.myanimelibrary.infrastructure.jparepositories.JPAScoreRepository;
 import com.example.myanimelibrary.infrastructure.mapper.AnimeMapper;
 import com.example.myanimelibrary.infrastructure.mapper.ScoreMapper;
-import org.hibernate.internal.build.AllowPrintStacktrace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

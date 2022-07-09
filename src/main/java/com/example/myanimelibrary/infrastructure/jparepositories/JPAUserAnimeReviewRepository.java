@@ -8,12 +8,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface JPAUserAnimeReviewRepository extends JpaRepository<UserAnimeReviewEntity, String> {
+public interface JPAUserAnimeReviewRepository extends JpaRepository<UserAnimeReviewEntity, Long> {
 
 //    public void
-    UserAnimeReviewEntity getById(String id);
+    UserAnimeReviewEntity getById(Long id);
+
 
     List<UserAnimeReviewEntity> getAllByAnimeEntity(AnimeEntity Anime);
 
-    void deleteById(String id);
+    void deleteById(Long id);
+
+    List<UserAnimeReviewEntity> getAllByUserEntityId(Long userId);
 }

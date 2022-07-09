@@ -1,15 +1,13 @@
 package com.example.myanimelibrary.domain;
 
-import java.util.ArrayList;
-
 public class LibraryStack {
 
     private Library library;
-    private ArrayList<Stack> stacks;
+    private Stack stacks;
 
-    public LibraryStack(Library library, ArrayList<Stack> categories) {
+    public LibraryStack(Library library, Stack stacks) {
         this.library = library;
-        this.stacks = categories;
+        this.stacks = stacks;
     }
 
     public Library getLibrary() {
@@ -20,11 +18,11 @@ public class LibraryStack {
         this.library = library;
     }
 
-    public ArrayList<Stack> getCategories() {
+    public Stack getStacks() {
         return stacks;
     }
 
-    public void setCategories(ArrayList<Stack> categories) {
-        this.stacks = categories;
+    public void setStacks(Stack stacks) {
+        this.stacks = stacks;
     }
 }

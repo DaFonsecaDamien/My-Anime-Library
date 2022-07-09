@@ -1,19 +1,19 @@
-package com.example.myanimelibrary.application.controller;
+package com.example.myanimelibrary.infrastructure.web.controller;
 
 import com.example.myanimelibrary.domain.Anime;
 import com.example.myanimelibrary.domain.Score;
+import com.example.myanimelibrary.domain.UserAnimeReview;
 import com.example.myanimelibrary.domain.service.AnimeService;
 import com.example.myanimelibrary.domain.service.ScoreService;
 import com.example.myanimelibrary.domain.service.UserAnimeReviewService;
 import com.example.myanimelibrary.infrastructure.request.CreateUserAnimeReviewRequest;
-import com.google.gson.Gson;
+import com.example.myanimelibrary.infrastructure.request.SearchAnimeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/animeList/anime")
@@ -31,18 +31,19 @@ public class AnimeController {
     }
 
     @GetMapping("/search")
-    public List<Anime> SearchAnime() throws IOException {
-        return animeService.searchAnime(new HashMap<>());
+    public ResponseEntity<List<Anime>> SearchAnime(@RequestBody SearchAnimeRequest request) throws IOException {
+        return ResponseEntity.ok(animeService.searchAnime(request));
     }
 
     @GetMapping("/{id}")
-    public Anime getAnimeById(@PathVariable("id") String id ){
-        return animeService.getAnimeById(id);
+    public ResponseEntity<Anime> getAnimeById(@PathVariable("id") Long id ){
+
+        return ResponseEntity.ok(animeService.getAnimeById(id));
     }
 
     @PostMapping("/{id}/createReview")
-    public void createReview(@PathVariable("id") String id, @RequestBody CreateUserAnimeReviewRequest request){
-        userAnimeReviewService.createAnimeReview(id ,request);
+    public ResponseEntity<UserAnimeReview> createReview(@PathVariable("id") Long id, @RequestBody CreateUserAnimeReviewRequest request){
+        UserAnimeReview savedReview = userAnimeReviewService.createAnimeReview(id ,request);
         Anime animeToUpdate = animeService.getAnimeById(id);
         System.out.println(animeToUpdate +" ///// "+animeToUpdate.getId());
         Score score = scoreService.getScoreByAnimeAndValue(request.getScore(), animeToUpdate);
@@ -53,10 +54,6 @@ public class AnimeController {
         animeToUpdate.updateNbVotes(scoresAnime);
         System.out.println(animeToUpdate +" ///// "+animeToUpdate.getId());
         animeService.saveAnime(animeToUpdate);
+        return ResponseEntity.ok(savedReview);
     }
-
-
-
-
-
 }
