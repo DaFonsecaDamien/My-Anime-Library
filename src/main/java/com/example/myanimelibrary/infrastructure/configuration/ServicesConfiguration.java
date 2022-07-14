@@ -41,4 +41,9 @@ public class ServicesConfiguration {
     StackService stackService(StackAnimeService stackAnimeService, LibraryService libraryService, StackRepository stackRepository, StackMapper stackMapper, AnimeService animeService){
         return new StackService(stackAnimeService, libraryService, stackRepository, stackMapper, animeService);
     }
+
+    @Bean
+    UserService userService(UserRepository userRepository){
+        return new UserService(userRepository);
+    }
 }
