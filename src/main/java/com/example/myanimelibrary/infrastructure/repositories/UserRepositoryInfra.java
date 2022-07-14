@@ -3,12 +3,15 @@ package com.example.myanimelibrary.infrastructure.repositories;
 import com.example.myanimelibrary.domain.User;
 import com.example.myanimelibrary.domain.repositories.UserRepository;
 import com.example.myanimelibrary.infrastructure.entities.UserEntity;
+import com.example.myanimelibrary.infrastructure.exception.ResourceNotFoundException;
 import com.example.myanimelibrary.infrastructure.jparepositories.JPAUserRepository;
 import com.example.myanimelibrary.infrastructure.mapper.UserMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Repository
 @Primary
 public class UserRepositoryInfra implements UserRepository {
@@ -29,11 +32,16 @@ public class UserRepositoryInfra implements UserRepository {
 
     @Override
     public User getUserByUsername(String username) {
-        return null;
+        UserEntity userEntityFound = jpaUserRepository.findByUsername(username);
+        if (userEntityFound == null) {
+            throw new ResourceNotFoundException("User not found");
+        }
+        return userMapper.fromEntityToModel(userEntityFound);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        List<UserEntity> userEntitiesFound = jpaUserRepository.findAll();
+        return userEntitiesFound.stream().map(userMapper::fromEntityToModel).collect(Collectors.toList());
     }
 }
