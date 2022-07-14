@@ -31,7 +31,7 @@ public class UserRepositoryInfra implements UserRepository {
     }
 
     @Override
-    public User getUserByUsername(String login) {
+    public User getUserByLogin(String login) {
         UserEntity userEntityFound = jpaUserRepository.findByLogin(login);
         if (userEntityFound == null) {
             throw new ResourceNotFoundException("User not found");
