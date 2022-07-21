@@ -10,7 +10,7 @@ public class UserMapper {
     public User fromEntityToModel(UserEntity userEntity){
         return new User(
                 userEntity.getId(),
-                userEntity.getLogin(),
+                userEntity.getUsername(),
                 userEntity.getPassword(),
                 userEntity.getPseudo()
         );
@@ -19,7 +19,7 @@ public class UserMapper {
     public UserEntity fromModelToEntity(User user){
         return new UserEntity(
                 user.getId(),
-                user.getLogin(),
+                user.getUsername(),
                 user.getPassword(),
                 user.getPseudo()
         );

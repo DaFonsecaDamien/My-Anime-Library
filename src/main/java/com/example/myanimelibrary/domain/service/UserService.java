@@ -17,8 +17,8 @@ public class UserService {
         return userRepository.saveUser(user);
     }
 
-    public User getUserByLogin(String login) {
-        return userRepository.getUserByLogin(login);
+    public User getUserByUsername(String username) {
+        return userRepository.getUserByUsername(username);
     }
 
     public List<User> getAllUsers() {return userRepository.getAllUsers();}

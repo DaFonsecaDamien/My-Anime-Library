@@ -2,18 +2,18 @@ package com.example.myanimelibrary.infrastructure.request;
 
 public class UserRequest {
 
-    private String login;
+    private String username;
     private String password;
     private String pseudo;
 
-    public UserRequest(String login, String password, String pseudo) {
-        this.login = login;
+    public UserRequest(String username, String password, String pseudo) {
+        this.username = username;
         this.password = password;
         this.pseudo = pseudo;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -24,8 +24,8 @@ public class UserRequest {
         return pseudo;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
