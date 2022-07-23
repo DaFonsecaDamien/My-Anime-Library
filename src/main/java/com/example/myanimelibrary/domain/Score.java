@@ -20,6 +20,21 @@ public class Score {
         this.anime = anime;
     }
 
+    public static List<Score> generateDefaultScoreList(Anime anime) {
+        List<Score> scoreList = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            Score score = new Score(
+                    null,
+                    i,
+                    0,
+                    0,
+                    anime
+            );
+            scoreList.add(score);
+        }
+        return scoreList;
+    }
+
     public Long getId() {
         return id;
     }
@@ -58,20 +73,5 @@ public class Score {
 
     public void setAnime(Anime anime) {
         this.anime = anime;
-    }
-
-    public static List<Score> generateDefaultScoreList(Anime anime){
-        List<Score> scoreList = new ArrayList<>();
-        for( int i = 0; i < 11; i++){
-            Score score = new Score(
-                    null,
-                    i,
-                    0,
-                    0,
-                    anime
-            );
-            scoreList.add(score);
-        }
-        return scoreList;
     }
 }

@@ -11,18 +11,18 @@ public class LibraryMapper {
     private final UserMapper userMapper;
 
     @Autowired
-    public LibraryMapper( UserMapper userMapper) {
+    public LibraryMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
 
-    public LibraryEntity fromModelToEntity(Library library){
+    public LibraryEntity fromModelToEntity(Library library) {
         return new LibraryEntity(
                 library.getId(),
                 userMapper.fromModelToEntity(library.getUser())
         );
     }
 
-    public Library fromEntityToModel(LibraryEntity libraryEntity){
+    public Library fromEntityToModel(LibraryEntity libraryEntity) {
         return new Library(
                 libraryEntity.getId(),
                 userMapper.fromEntityToModel(libraryEntity.getUserEntity()),

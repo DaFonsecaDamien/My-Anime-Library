@@ -23,51 +23,51 @@ public class CreateUserAnimeReviewRequest {
         this.animeSiteUri = animeSiteUri;
     }
 
-    public void setAnime(Anime anime) {
-        this.anime = anime;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setCurrentEpisode(Integer currentEpisode) {
-        this.currentEpisode = currentEpisode;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public void setAnimeSiteUri(String animeSiteUri) {
-        this.animeSiteUri = animeSiteUri;
-    }
-
     public Anime getAnime() {
         return anime;
+    }
+
+    public void setAnime(Anime anime) {
+        this.anime = anime;
     }
 
     public User getUser() {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Integer getCurrentEpisode() {
         return currentEpisode;
+    }
+
+    public void setCurrentEpisode(Integer currentEpisode) {
+        this.currentEpisode = currentEpisode;
     }
 
     public Integer getScore() {
         return score;
     }
 
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     public String getComment() {
         return comment;
     }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public String getAnimeSiteUri() {
         return animeSiteUri;
+    }
+
+    public void setAnimeSiteUri(String animeSiteUri) {
+        this.animeSiteUri = animeSiteUri;
     }
 }

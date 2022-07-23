@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class SpecificationMapper {
 
-    public static Specification<AnimeEntity> FromSearchFilterToSpecification(List<SearchFilter> searchFilters){
+    public static Specification<AnimeEntity> FromSearchFilterToSpecification(List<SearchFilter> searchFilters) {
         Specification spec = Specification.where(SpecificationMapper.createSpecification(searchFilters.remove(0)));
         for (SearchFilter searchFilter : searchFilters) {
             spec = spec.and(SpecificationMapper.createSpecification(searchFilter));
@@ -51,11 +51,11 @@ public class SpecificationMapper {
     }
 
     private static Object castToRequiredType(Class fieldType, String value) {
-        if(fieldType.isAssignableFrom(Double.class)) {
+        if (fieldType.isAssignableFrom(Double.class)) {
             return Double.valueOf(value);
-        } else if(fieldType.isAssignableFrom(Integer.class)) {
+        } else if (fieldType.isAssignableFrom(Integer.class)) {
             return Integer.valueOf(value);
-        } else if(Enum.class.isAssignableFrom(fieldType)) {
+        } else if (Enum.class.isAssignableFrom(fieldType)) {
             return Enum.valueOf(fieldType, value);
         }
         return null;

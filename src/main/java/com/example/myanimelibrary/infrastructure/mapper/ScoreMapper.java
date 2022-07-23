@@ -16,7 +16,7 @@ public class ScoreMapper {
         this.animeMapper = animeMapper;
     }
 
-    public ScoreEntity FromModelToEntity(Score score){
+    public ScoreEntity FromModelToEntity(Score score) {
         return new ScoreEntity(
                 score.getId(),
                 animeMapper.FromModelToEntity(score.getAnime()),
@@ -26,7 +26,7 @@ public class ScoreMapper {
         );
     }
 
-    public Score FromEntityToModel(ScoreEntity scoreEntity){
+    public Score FromEntityToModel(ScoreEntity scoreEntity) {
         return new Score(
                 scoreEntity.getId(),
                 scoreEntity.getValue(),

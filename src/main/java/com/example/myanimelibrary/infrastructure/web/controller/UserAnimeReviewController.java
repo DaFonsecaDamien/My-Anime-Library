@@ -29,21 +29,21 @@ public class UserAnimeReviewController {
     }
 
     @PutMapping("/{id}/update")
-    public void updateUserAnimeReview(@PathVariable("id") Long id, @RequestBody UpdateUserAnimeReviewRequest request){
+    public void updateUserAnimeReview(@PathVariable("id") Long id, @RequestBody UpdateUserAnimeReviewRequest request) {
         userAnimeReviewService.updateAnimeReview(id, request);
     }
 
     @GetMapping("/getReviewByAnime")
-    public ResponseEntity<List<UserAnimeReview>> getReviewByAnime(@RequestParam("id") Long idAnime){
+    public ResponseEntity<List<UserAnimeReview>> getReviewByAnime(@RequestParam("id") Long idAnime) {
         return ResponseEntity.ok(userAnimeReviewService.getAllByAnimeId(idAnime));
     }
 
     @DeleteMapping("/{id}/delete")
-    public void deleteUserAnimeReview(@PathVariable("id") Long id){
+    public void deleteUserAnimeReview(@PathVariable("id") Long id) {
         UserAnimeReview userAnimeReview = userAnimeReviewService.getById(id);
         userAnimeReviewService.deleteById(id);
         Score score = scoreService.getScoreByAnimeAndValue(userAnimeReview.getScore(), userAnimeReview.getAnime());
-        score.setNbVotes(score.getNbVotes()-1);
+        score.setNbVotes(score.getNbVotes() - 1);
         scoreService.saveScore(score);
         Anime animeToUpdate = score.getAnime();
         List<Score> scores = scoreService.getAllscoreFromAnime(animeToUpdate);
@@ -52,7 +52,7 @@ public class UserAnimeReviewController {
     }
 
     @GetMapping("/myReviews")
-    public ResponseEntity<List<UserAnimeReview>> getAllAnimeReviewByUserId(@RequestParam("user") Long id){
+    public ResponseEntity<List<UserAnimeReview>> getAllAnimeReviewByUserId(@RequestParam("user") Long id) {
         return ResponseEntity.ok(userAnimeReviewService.getAllAnimeReviewByUserId(id));
     }
 }

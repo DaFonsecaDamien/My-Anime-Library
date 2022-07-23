@@ -12,6 +12,10 @@ public class StackManga {
         this.stack = stack;
     }
 
+    public StackManga() {
+
+    }
+
     public Long getId() {
         return id;
     }

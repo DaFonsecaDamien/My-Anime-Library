@@ -15,7 +15,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="MyAnimeLibrary" />
+          <factory-entry name="MyAnimeLibrary" value="50d6dfb9-2477-48d4-9af0-59f0f7b1f393" />
           <factory-entry name="entityManagerFactory" />
         </datasource-mapping>
         <naming-strategy-map />

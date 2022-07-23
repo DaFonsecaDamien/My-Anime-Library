@@ -1,16 +1,18 @@
 package com.example.myanimelibrary.domain.repositories;
 
-import com.example.myanimelibrary.domain.Stack;
 import com.example.myanimelibrary.domain.StackManga;
 
 import java.util.List;
 
 public interface StackMangaRepository {
 
-    StackManga saveStackAnime(StackManga stackManga);
+    StackManga saveStackManga(StackManga stackManga);
 
-    void deleteStackManga(StackManga stackManga);
+    void deleteStackMangaById(Long stackMangaId);
 
-    List<StackManga> getAllMangaFromStack(Stack stack);
+    List<StackManga> getAllMangaFromStackId(Long stackId);
 
+    StackManga getStackMangaById(Long id);
+
+    boolean existMangaInStack(Long mangaId, Long stackId);
 }
