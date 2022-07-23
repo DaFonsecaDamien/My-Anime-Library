@@ -44,7 +44,6 @@ public class AnimeRepositoryInfra implements AnimeRepository {
                 } else {
                     filteredFilters.add(filter);
                 }
-
         }
         List<AnimeEntity> animeEntities = new ArrayList<>();
         if( filteredFilters.size() > 0) {

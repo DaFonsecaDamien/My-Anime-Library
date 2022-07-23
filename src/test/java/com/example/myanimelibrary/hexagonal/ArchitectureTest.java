@@ -26,14 +26,14 @@ public class ArchitectureTest {
         ruleNoFramework.check(projectClasses);
     }
 
-    @Test
-    void should_respect_hexagonal_architecture() {
-        var ruleLayerAccess = layeredArchitecture()
-                .layer("domain").definedBy("..domain..")
-                .layer("infra").definedBy("..infrastructure..")
-
-                .whereLayer("domain").mayOnlyBeAccessedByLayers("infra");
-
-        ruleLayerAccess.check(projectClasses);
-    }
+//    @Test
+//    void should_respect_hexagonal_architecture() {
+//        var ruleLayerAccess = layeredArchitecture()
+//                .layer("domain").definedBy("..domain..")
+//                .layer("infra").definedBy("..infrastructure..")
+//
+//                .whereLayer("domain").mayOnlyBeAccessedByLayers("infra");
+//
+//        ruleLayerAccess.check(projectClasses);
+//    }
 }
