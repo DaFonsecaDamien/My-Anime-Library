@@ -38,14 +38,14 @@ public class AnimeService {
         this.specificationMapper = specificationMapper;
     }
 
-    public Anime getAnimeById(Long id){
+    public Anime getAnimeById(Long id) {
         return animeRepository.getAnimeById(id);
     }
 
     public List<Anime> searchAnime(SearchAnimeRequest request) throws IOException {
 
         List<Anime> response = searchInDb(request);
-        if( response.size() == 0 ){
+        if (response.size() == 0) {
 
             String apiUrl = animeMapper.searchAnimeRequestTuApiUrl(request);
             response = animeMapper.FromApiToModelList(searchInApi(apiUrl).data);
@@ -70,17 +70,16 @@ public class AnimeService {
         return responseGet;
     }
 
-    public List<Anime> searchInDb(SearchAnimeRequest request)
-    {
+    public List<Anime> searchInDb(SearchAnimeRequest request) {
         //Specification<AnimeEntity> animeEntitySpecification = specificationMapper.FromSearchFilterToSpecification(request.getFilters());
         return animeRepository.findByFilters(request.getFilters());
     }
 
-    public List<Anime> saveDataFromApi(List<Anime> animesToSave){
+    public List<Anime> saveDataFromApi(List<Anime> animesToSave) {
         List<Anime> savedAnime = new ArrayList<>();
-        for (int i = 0; i < animesToSave.size(); i++){
-            if( !animeRepository.existsAnimeEntityByTitlesContaining(animesToSave.get(i).getTitles().get(""))){
-                Anime animeSaved = animeRepository.saveAnime(animesToSave.get(i));
+        for (Anime anime : animesToSave) {
+            if (!animeRepository.existsAnimeEntityByTitlesContaining(anime.getTitles().get(""))) {
+                Anime animeSaved = animeRepository.saveAnime(anime);
                 savedAnime.add(animeSaved);
                 scoreRepository.saveScoreGenerated(Score.generateDefaultScoreList(animeSaved));
             }
@@ -88,13 +87,13 @@ public class AnimeService {
         return savedAnime;
     }
 
-    private void saveGeneratedScoreAnime(List<Score> scoresToSave){
-        for( int i = 0; i < scoresToSave.size(); i++){
-            scoreRepository.saveScore(scoresToSave.get(i));
+    private void saveGeneratedScoreAnime(List<Score> scoresToSave) {
+        for (Score score : scoresToSave) {
+            scoreRepository.saveScore(score);
         }
     }
 
-    public void saveAnime(Anime anime){
+    public void saveAnime(Anime anime) {
         animeRepository.saveAnime(anime);
     }
 

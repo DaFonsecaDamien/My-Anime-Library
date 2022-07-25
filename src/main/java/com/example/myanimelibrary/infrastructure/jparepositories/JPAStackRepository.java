@@ -11,6 +11,7 @@ import java.util.List;
 public interface JPAStackRepository extends JpaRepository<StackEntity, Long> {
 
     List<StackEntity> findAllByLibrary(LibraryEntity libraryEntity);
+
     List<StackEntity> findAllByNameLike(String name);
 
     boolean existsStackEntityByNameEqualsAndAndLibrary_Id(String name, Long libraryId);

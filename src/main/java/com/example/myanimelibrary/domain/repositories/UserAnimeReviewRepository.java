@@ -17,5 +17,4 @@ public interface UserAnimeReviewRepository {
 
     List<UserAnimeReview> getAllUserAnimeReviewByUserId(Long userId);
 
-
 }

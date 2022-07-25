@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+//TODO: create manga mapper
 @Component
 public class AnimeMapper {
 
@@ -25,12 +26,14 @@ public class AnimeMapper {
         this.scoreMapper = scoreMapper;
     }
 
-    public List<Anime> FromApiToModelList(ArrayList<APIAnime.Datum> apiList){
+    public List<Anime> FromApiToModelList(ArrayList<APIAnime.Datum> apiList) {
         return apiList.stream().map(this::FromApiToModel).collect(Collectors.toList());
     }
 
+
     public AnimeEntity FromModelToEntity(Anime model){
-        return new AnimeEntity(model.getId(),
+        return new AnimeEntity(
+                model.getId(),
                 model.getTitles(),
                 model.getImageUrl(),
                 model.getYear(),
@@ -47,7 +50,7 @@ public class AnimeMapper {
         );
     }
 
-    public Anime FromEntityToModel(AnimeEntity entity){
+    public Anime FromEntityToModel(AnimeEntity entity) {
         return new Anime(entity.getId(),
                 entity.getTitles(),
                 entity.getImageUrl(),
@@ -64,8 +67,9 @@ public class AnimeMapper {
                 entity.getRanking()
         );
     }
-// couche anti corruption
-    public Anime FromApiToModel(APIAnime.Datum apiData){
+
+    // couche anti corruption
+    public Anime FromApiToModel(APIAnime.Datum apiData) {
         return new Anime(null,
                 getAnimeTitleFromApiData(apiData.title, apiData.title_english, apiData.title_japanese),
                 apiData.images.jpg.image_url,
@@ -80,63 +84,63 @@ public class AnimeMapper {
                 0,
                 0,
                 0
-                );
+        );
     }
 
-    private AnimeState getAnimeStateFromApiData(APIAnime.Datum apiData){
+    private AnimeState getAnimeStateFromApiData(APIAnime.Datum apiData) {
         return apiData.status.equals("Finished Airing") ? AnimeState.FINISHED_AIRING : AnimeState.CURRENTLY_AIRING;
     }
 
-    private List<String> getGenreFromApiData(APIAnime.Datum apiData){
+    private List<String> getGenreFromApiData(APIAnime.Datum apiData) {
         List<String> genres = new ArrayList<>();
-        for(int i = 0; i < apiData.genres.size(); i++){
+        for (int i = 0; i < apiData.genres.size(); i++) {
             genres.add(apiData.genres.get(i).name);
         }
         return genres;
     }
-
-    public Map<String,String> getAnimeTitleFromApiData( String title, String enTitle, String jaTitle){
-        HashMap<String,String> titles = new HashMap<>();
-        titles.put("", title );
-        titles.put("en", enTitle );
-        titles.put("ja", jaTitle );
+    
+    public Map<String, String> getAnimeTitleFromApiData(String title, String enTitle, String jaTitle) {
+        HashMap<String, String> titles = new HashMap<>();
+        titles.put("", title);
+        titles.put("en", enTitle);
+        titles.put("ja", jaTitle);
         return titles;
     }
 
-    public String searchAnimeRequestTuApiUrl(SearchAnimeRequest request){
-        String baseApiUrl = "https://api.jikan.moe/v4/anime?";
+    public String searchAnimeRequestTuApiUrl(SearchAnimeRequest request) {
+        StringBuilder baseApiUrl = new StringBuilder("https://api.jikan.moe/v4/anime?");
         List<SearchFilter> filters = request.getFilters();
         for (int j = 0; j < filters.size(); j++)
         {
             switch (filters.get(j).getField()){
                 case "genre" :
-                    baseApiUrl += "genres=";
+                    baseApiUrl += "genre=";
                     // get api genre id https://api.jikan.moe/v4/genres/anime load genre as config
-                    for( int i = 0; i < filters.get(j).getValues().size(); i++){
-                        if( i == filters.get(j).getValues().size()-1 ){
-                            baseApiUrl += filters.get(j).getValues().get(i) + "&";
+                    for (int i = 0; i < filter.getValues().size(); i++) {
+                        if (i == filter.getValues().size() - 1) {
+                            baseApiUrl.append(filter.getValues().get(i)).append("&");
                             break;
                         }
-                        baseApiUrl += filters.get(j).getValues().get(i) + ",";
-                    };
+                        baseApiUrl.append(filter.getValues().get(i)).append(",");
+                    }
+                    ;
                     break;
-                case "title" :
-                    baseApiUrl += "q=" + filters.get(j).getValue() + "&";
+                case "title":
+                    baseApiUrl.append("q=").append(filter.getValue()).append("&");
                     break;
-                case "score" :
-                    baseApiUrl += "score=" + filters.get(j).getValue() + "&";
+                case "score":
+                    baseApiUrl.append("score=").append(filter.getValue()).append("&");
                     break;
-                case "status" :
-                    baseApiUrl += "status=" + filters.get(j).getValue() + "&";
+                case "status":
+                    baseApiUrl.append("status=").append(filter.getValue()).append("&");
                     break;
-                case "year" :
-                    baseApiUrl += "start_date=" + filters.get(j).getValue() + "&";
+                case "year":
+                    baseApiUrl.append("start_date=").append(filter.getValue()).append("&");
                     break;
-                default: break;
+                default:
+                    break;
             }
         }
-        return baseApiUrl;
+        return baseApiUrl.toString();
     }
-
-
 }

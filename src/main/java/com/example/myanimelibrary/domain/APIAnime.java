@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public class APIAnime {
 
-    public class Datum{
-
+    public class Datum {
         public Images images;
         public String title;
         public String title_english;
@@ -20,29 +19,28 @@ public class APIAnime {
         public ArrayList<Demographic> demographics;
     }
 
-    public class Demographic{
+    public class Demographic {
         public String name;
     }
 
-    public class Genre{
+    public class Genre {
         public String name;
     }
 
-    public class Images{
+    public class Images {
         public Jpg jpg;
     }
 
-    public class Jpg{
+    public class Jpg {
         public String image_url;
     }
 
 
-
-    public class Root{
+    public class Root {
         public ArrayList<Datum> data;
     }
 
-    public class Studio{
+    public class Studio {
         public String name;
     }
 

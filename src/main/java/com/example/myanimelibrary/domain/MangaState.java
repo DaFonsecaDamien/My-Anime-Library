@@ -1,5 +1,5 @@
 package com.example.myanimelibrary.domain;
 
 public enum MangaState {
-    FINISHED, PUBLISHING
+    FINISHED, PUBLISHING, ON_HOLD
 }

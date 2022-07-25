@@ -5,16 +5,15 @@ import java.util.Objects;
 
 public class UserMangaReview implements Serializable {
 
+    private Long id;
     private Manga manga;
     private User user;
-
-
     private Integer currentChapter;
     private Integer score;
     private String comment;
     private String readSiteUri;
 
-    public UserMangaReview(Manga manga, User user, Integer currentChapter, Integer score, String comment, String readSiteUri) {
+    public UserMangaReview(Long id, Manga manga, User user, Integer currentChapter, Integer score, String comment, String readSiteUri) {
         this.manga = manga;
         this.user = user;
         this.currentChapter = currentChapter;
@@ -25,6 +24,14 @@ public class UserMangaReview implements Serializable {
 
     public UserMangaReview() {
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Manga getManga() {

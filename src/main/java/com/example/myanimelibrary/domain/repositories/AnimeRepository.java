@@ -15,7 +15,7 @@ public interface AnimeRepository {
 
     boolean existsAnimeEntityByTitlesContaining(String title);
 
-    List<Anime> findByFilters (List<SearchFilter> filters);
+    List<Anime> findByFilters(List<SearchFilter> filters);
 
 
 }

@@ -30,29 +30,29 @@ public class AnimeController {
         this.scoreService = scoreService;
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public ResponseEntity<List<Anime>> SearchAnime(@RequestBody SearchAnimeRequest request) throws IOException {
         return ResponseEntity.ok(animeService.searchAnime(request));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Anime> getAnimeById(@PathVariable("id") Long id ){
+    public ResponseEntity<Anime> getAnimeById(@PathVariable("id") Long id) {
 
         return ResponseEntity.ok(animeService.getAnimeById(id));
     }
 
     @PostMapping("/{id}/createReview")
-    public ResponseEntity<UserAnimeReview> createReview(@PathVariable("id") Long id, @RequestBody CreateUserAnimeReviewRequest request){
-        UserAnimeReview savedReview = userAnimeReviewService.createAnimeReview(id ,request);
+    public ResponseEntity<UserAnimeReview> createReview(@PathVariable("id") Long id, @RequestBody CreateUserAnimeReviewRequest request) {
+        UserAnimeReview savedReview = userAnimeReviewService.createAnimeReview(id, request);
         Anime animeToUpdate = animeService.getAnimeById(id);
-        System.out.println(animeToUpdate +" ///// "+animeToUpdate.getId());
+        System.out.println(animeToUpdate + " ///// " + animeToUpdate.getId());
         Score score = scoreService.getScoreByAnimeAndValue(request.getScore(), animeToUpdate);
-        score.setNbVotes(score.getNbVotes()+1);
+        score.setNbVotes(score.getNbVotes() + 1);
         scoreService.saveScore(score);
         List<Score> scoresAnime = scoreService.getAllscoreFromAnime(animeToUpdate);
         animeToUpdate.makeAverage(scoresAnime);
         animeToUpdate.updateNbVotes(scoresAnime);
-        System.out.println(animeToUpdate +" ///// "+animeToUpdate.getId());
+        System.out.println(animeToUpdate + " ///// " + animeToUpdate.getId());
         animeService.saveAnime(animeToUpdate);
         return ResponseEntity.ok(savedReview);
     }

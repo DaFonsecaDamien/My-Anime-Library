@@ -15,7 +15,7 @@ public class StackMapper {
         this.libraryMapper = libraryMapper;
     }
 
-    public StackEntity fromModelToEntity(Stack stack){
+    public StackEntity fromModelToEntity(Stack stack) {
         return new StackEntity(
                 stack.getId(),
                 stack.getName(),
@@ -24,7 +24,7 @@ public class StackMapper {
         );
     }
 
-    public Stack fromEntityToModel(StackEntity stackEntity){
+    public Stack fromEntityToModel(StackEntity stackEntity) {
         return new Stack(
                 stackEntity.getId(),
                 stackEntity.getName(),

@@ -17,37 +17,37 @@ public class StackAnimeService {
         this.stackAnimeRepository = stackAnimeRepository;
     }
 
-    public StackAnime saveAnimeInStack(Stack stack, Anime anime){
+    public StackAnime saveAnimeInStack(Stack stack, Anime anime) {
         StackAnime animeInStack = new StackAnime();
         animeInStack.setAnime(anime);
         animeInStack.setStack(stack);
         return stackAnimeRepository.saveStackAnime(animeInStack);
     }
 
-    public List<StackAnime> saveAnimesInStack(List<Anime> animes, Stack stack){
+    public List<StackAnime> saveAnimesInStack(List<Anime> animes, Stack stack) {
         List<StackAnime> animesSaved = new ArrayList<>();
-        for( Anime anime : animes){
+        for (Anime anime : animes) {
             animesSaved.add(saveAnimeInStack(stack, anime));
         }
         return animesSaved;
     }
 
-    public List<StackAnime> getAllAnimeInStackByStackId(Long stackId){
+    public List<StackAnime> getAllAnimeInStackByStackId(Long stackId) {
         return stackAnimeRepository.getAllAnimeFromStackId(stackId);
     }
 
-    public void deleteAnimeFromStackById(Long stackAnimeId){
+    public void deleteAnimeFromStackById(Long stackAnimeId) {
         stackAnimeRepository.deleteStackAnimeById(stackAnimeId);
     }
 
-    public void deleteAnimesFromStackById(List<StackAnime> stackAnimeList){
-        for( StackAnime stackAnime : stackAnimeList){
+    public void deleteAnimesFromStackById(List<StackAnime> stackAnimeList) {
+        for (StackAnime stackAnime : stackAnimeList) {
             deleteAnimeFromStackById(stackAnime.getId());
         }
     }
 
-    public void checkIfAnimeAlreadyInStack(Long animeId, Long stackId){
-        if( stackAnimeRepository.existAnimeInStack(animeId, stackId)){
+    public void checkIfAnimeAlreadyInStack(Long animeId, Long stackId) {
+        if (stackAnimeRepository.existAnimeInStack(animeId, stackId)) {
             throw new AnimeAlreadyInStackException("Anime already in stack");
         }
     }

@@ -7,19 +7,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    User fromEntityToModel(UserEntity userEntity){
+    public User fromEntityToModel(UserEntity userEntity){
         return new User(
                 userEntity.getId(),
-                userEntity.getLogin(),
+                userEntity.getUsername(),
                 userEntity.getPassword(),
                 userEntity.getPseudo()
         );
     }
 
-    UserEntity fromModelToEntity(User user){
+    public UserEntity fromModelToEntity(User user){
         return new UserEntity(
                 user.getId(),
-                user.getLogin(),
+                user.getUsername(),
                 user.getPassword(),
                 user.getPseudo()
         );

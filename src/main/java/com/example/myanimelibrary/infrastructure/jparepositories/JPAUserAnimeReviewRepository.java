@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface JPAUserAnimeReviewRepository extends JpaRepository<UserAnimeReviewEntity, Long> {
 
-//    public void
+    //    public void
     UserAnimeReviewEntity getById(Long id);
 
 

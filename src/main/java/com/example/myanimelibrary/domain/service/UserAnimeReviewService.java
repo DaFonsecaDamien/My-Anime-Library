@@ -24,13 +24,13 @@ public class UserAnimeReviewService {
         this.userAnimeReviewMapper = userAnimeReviewMapper;
     }
 
-    public UserAnimeReview createAnimeReview(Long id, CreateUserAnimeReviewRequest request){
+    public UserAnimeReview createAnimeReview(Long id, CreateUserAnimeReviewRequest request) {
         Anime anime = animeRepository.getAnimeById(id);
         request.setAnime(anime);
         return userAnimeReviewRepository.saveUserAnimeReview(userAnimeReviewMapper.FromRequestToModel(request));
     }
 
-    public void updateAnimeReview(Long id, UpdateUserAnimeReviewRequest request){
+    public void updateAnimeReview(Long id, UpdateUserAnimeReviewRequest request) {
         UserAnimeReview review = userAnimeReviewRepository.getUserReviewAnimeEntityById(id);
         review.setAnimeSiteUri(request.getAnimeSiteUri());
         review.setComment(request.getComment());
@@ -39,25 +39,25 @@ public class UserAnimeReviewService {
         userAnimeReviewRepository.saveUserAnimeReview(review);
     }
 
-    public UserAnimeReview getById(Long id){
+    public UserAnimeReview getById(Long id) {
         return userAnimeReviewRepository.getUserReviewAnimeEntityById(id);
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         userAnimeReviewRepository.deleteUserAnimeReviewById(id);
     }
 
-    public List<UserAnimeReview> getAllByAnimeId(Long animeId){
+    public List<UserAnimeReview> getAllByAnimeId(Long animeId) {
         Anime anime = animeService.getAnimeById(animeId);
         return userAnimeReviewRepository
                 .getUserReviewAnimeEntityByAnime(anime);
     }
 
-    public List<UserAnimeReview> getAllAnimeReviewByUserId(Long userId){
+    public List<UserAnimeReview> getAllAnimeReviewByUserId(Long userId) {
         return userAnimeReviewRepository.getAllUserAnimeReviewByUserId(userId);
     }
 
-    public List<UserAnimeReview> getAllUserAnimeReviewByAnimeId(Long animeId){
+    public List<UserAnimeReview> getAllUserAnimeReviewByAnimeId(Long animeId) {
         Anime anime = animeService.getAnimeById(animeId);
         return userAnimeReviewRepository.getUserReviewAnimeEntityByAnime(anime);
     }
