@@ -8,6 +8,6 @@ RUN ["mvn", "package", "-Dmaven.test.skip=true"]
 FROM openjdk:17.0.2-slim-buster
 
 COPY --from=build /home/app/target/*.jar /usr/local/lib/build.jar
-EXPOSE 3002
+EXPOSE 8080
 
 ENTRYPOINT ["java","-jar","/usr/local/lib/build.jar"]
