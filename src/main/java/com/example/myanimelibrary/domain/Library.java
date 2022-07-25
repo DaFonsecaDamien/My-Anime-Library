@@ -16,6 +16,9 @@ public class Library implements Serializable {
         this.stacks = stacks;
     }
 
+    public Library() {
+    }
+
     public Long getId() {
         return id;
     }

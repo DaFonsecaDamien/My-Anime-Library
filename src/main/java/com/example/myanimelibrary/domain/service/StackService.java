@@ -18,16 +18,15 @@ public class StackService {
     private final StackMangaService stackMangaService;
     private final LibraryService libraryService;
     private final StackRepository stackRepository;
-    private final StackMapper stackMapper;
     private final AnimeService animeService;
     private final MangaService mangaService;
 
-    public StackService(StackAnimeService stackAnimeService, StackMangaService stackMangaService, LibraryService libraryService, StackRepository stackRepository, StackMapper stackMapper, AnimeService animeService, MangaService mangaService) {
+
+    public StackService(StackAnimeService stackAnimeService, StackMangaService stackMangaService, LibraryService libraryService, StackRepository stackRepository, AnimeService animeService, MangaService mangaService) {
         this.stackAnimeService = stackAnimeService;
         this.stackMangaService = stackMangaService;
         this.libraryService = libraryService;
         this.stackRepository = stackRepository;
-        this.stackMapper = stackMapper;
         this.animeService = animeService;
         this.mangaService = mangaService;
     }

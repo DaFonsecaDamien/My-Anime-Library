@@ -15,6 +15,9 @@ public class SearchFilter {
         this.values = values;
     }
 
+    public SearchFilter() {
+    }
+
     public String getField() {
         return field;
     }

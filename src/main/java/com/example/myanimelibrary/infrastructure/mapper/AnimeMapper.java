@@ -30,8 +30,9 @@ public class AnimeMapper {
         return apiList.stream().map(this::FromApiToModel).collect(Collectors.toList());
     }
 
-    public AnimeEntity FromModelToEntity(Anime model) {
-        return new AnimeEntity(model.getId(),
+    public AnimeEntity FromModelToEntity(Anime model){
+        return new AnimeEntity(
+                model.getId(),
                 model.getTitles(),
                 model.getImageUrl(),
                 model.getYear(),
@@ -111,7 +112,7 @@ public class AnimeMapper {
         for (SearchFilter filter : filters) {
             switch (filter.getField()) {
                 case "genre":
-                    baseApiUrl.append("genres=");
+                    baseApiUrl.append("genre=");
                     // get api genre id https://api.jikan.moe/v4/genres/anime load genre as config
                     for (int i = 0; i < filter.getValues().size(); i++) {
                         if (i == filter.getValues().size() - 1) {

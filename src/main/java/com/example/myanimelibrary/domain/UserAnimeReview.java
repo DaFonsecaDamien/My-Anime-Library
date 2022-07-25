@@ -23,6 +23,9 @@ public class UserAnimeReview implements Serializable {
         this.animeSiteUri = animeSiteUri;
     }
 
+    public UserAnimeReview() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -79,16 +82,16 @@ public class UserAnimeReview implements Serializable {
         this.animeSiteUri = animeSiteUri;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserAnimeReview that = (UserAnimeReview) o;
-        return Objects.equals(anime.getId(), that.anime.getId()) && Objects.equals(user.getId(), that.user.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(anime.getId(), user.getId());
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        UserAnimeReview that = (UserAnimeReview) o;
+//        return Objects.equals(anime.getId(), that.anime.getId()) && Objects.equals(user.getId(), that.user.getId());
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(anime.getId(), user.getId());
+//    }
 }

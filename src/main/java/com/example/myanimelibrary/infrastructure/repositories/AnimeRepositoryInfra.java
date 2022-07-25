@@ -21,16 +21,12 @@ import java.util.stream.Collectors;
 public class AnimeRepositoryInfra implements AnimeRepository {
 
     private final JPAAnimeRepository jpaAnimeRepository;
-    private final ScoreRepositoryInfra scoreRepositoryInfra;
     private final AnimeMapper animeMapper;
-    private final ScoreMapper scoreMapper;
 
     @Autowired
-    public AnimeRepositoryInfra(JPAAnimeRepository jpaAnimeRepository, ScoreRepositoryInfra scoreRepositoryInfra, AnimeMapper animeMapper, ScoreMapper scoreMapper) {
+    public AnimeRepositoryInfra(JPAAnimeRepository jpaAnimeRepository, AnimeMapper animeMapper) {
         this.jpaAnimeRepository = jpaAnimeRepository;
-        this.scoreRepositoryInfra = scoreRepositoryInfra;
         this.animeMapper = animeMapper;
-        this.scoreMapper = scoreMapper;
     }
 
     @Override
