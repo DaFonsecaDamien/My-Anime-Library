@@ -20,6 +20,7 @@ public class Score {
         this.anime = anime;
     }
 
+
     public static List<Score> generateDefaultScoreList(Anime anime){
         if( anime == null){
             return List.of();
@@ -80,5 +81,4 @@ public class Score {
     public void setAnime(Anime anime) {
         this.anime = anime;
     }
-
 }

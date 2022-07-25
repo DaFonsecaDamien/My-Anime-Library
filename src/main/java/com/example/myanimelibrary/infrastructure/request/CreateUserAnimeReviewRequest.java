@@ -25,7 +25,7 @@ public class CreateUserAnimeReviewRequest {
 
     public CreateUserAnimeReviewRequest() {
     }
- 
+
     public Anime getAnime() {
         return anime;
     }

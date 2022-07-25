@@ -21,6 +21,7 @@ public class StackService {
     private final AnimeService animeService;
     private final MangaService mangaService;
 
+
     public StackService(StackAnimeService stackAnimeService, StackMangaService stackMangaService, LibraryService libraryService, StackRepository stackRepository, AnimeService animeService, MangaService mangaService) {
         this.stackAnimeService = stackAnimeService;
         this.stackMangaService = stackMangaService;
@@ -29,8 +30,6 @@ public class StackService {
         this.animeService = animeService;
         this.mangaService = mangaService;
     }
-
-
 
     public Stack createStack(CreateStackRequest request) {
         checkIfStackNameAlreadyTakenInUserLibrary(request.getName(), request.getUserId());

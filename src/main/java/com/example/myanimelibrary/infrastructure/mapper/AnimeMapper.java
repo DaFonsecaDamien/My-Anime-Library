@@ -30,7 +30,6 @@ public class AnimeMapper {
         return apiList.stream().map(this::FromApiToModel).collect(Collectors.toList());
     }
 
-
     public AnimeEntity FromModelToEntity(Anime model){
         return new AnimeEntity(
                 model.getId(),
