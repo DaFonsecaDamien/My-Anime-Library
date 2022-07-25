@@ -1,0 +1,9 @@
+domain = logique métier / services /objects
+domain peut pas appeller framework et infra (test qui le fait)
+services appellés dans les controllers
+autowired build auto des objets
+RestController = composant / build tout seul
+service pas d'annotations
+services declares dans un fichier de config instanties auto par jee
+repo gere transi entre entities bdd et models
+services recoit et envoie modeles
