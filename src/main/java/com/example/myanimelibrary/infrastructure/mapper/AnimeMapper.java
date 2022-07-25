@@ -96,7 +96,7 @@ public class AnimeMapper {
         }
         return genres;
     }
-
+    
     public Map<String, String> getAnimeTitleFromApiData(String title, String enTitle, String jaTitle) {
         HashMap<String, String> titles = new HashMap<>();
         titles.put("", title);
