@@ -97,7 +97,7 @@ public class AnimeMapper {
 
     public Map<String,String> getAnimeTitleFromApiData( String title, String enTitle, String jaTitle){
         HashMap<String,String> titles = new HashMap<>();
-        titles.put("", title );
+        titles.put("fr", title );
         titles.put("en", enTitle );
         titles.put("ja", jaTitle );
         return titles;

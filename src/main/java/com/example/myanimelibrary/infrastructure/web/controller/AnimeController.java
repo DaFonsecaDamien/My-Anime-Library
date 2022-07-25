@@ -30,7 +30,7 @@ public class AnimeController {
         this.scoreService = scoreService;
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public ResponseEntity<List<Anime>> SearchAnime(@RequestBody SearchAnimeRequest request) throws IOException {
         return ResponseEntity.ok(animeService.searchAnime(request));
     }
