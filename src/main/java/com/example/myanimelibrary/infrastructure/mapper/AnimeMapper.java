@@ -110,11 +110,10 @@ public class AnimeMapper {
     public String searchAnimeRequestTuApiUrl(SearchAnimeRequest request) {
         StringBuilder baseApiUrl = new StringBuilder("https://api.jikan.moe/v4/anime?");
         List<SearchFilter> filters = request.getFilters();
-        for (int j = 0; j < filters.size(); j++)
-        {
-            switch (filters.get(j).getField()){
-                case "genre" :
-                    baseApiUrl += "genre=";
+        for (SearchFilter filter : filters) {
+            switch (filter.getField()) {
+                case "genre":
+                    baseApiUrl.append("genre=");
                     // get api genre id https://api.jikan.moe/v4/genres/anime load genre as config
                     for (int i = 0; i < filter.getValues().size(); i++) {
                         if (i == filter.getValues().size() - 1) {

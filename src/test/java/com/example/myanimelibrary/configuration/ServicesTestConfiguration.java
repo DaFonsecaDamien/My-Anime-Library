@@ -39,8 +39,8 @@ public class ServicesTestConfiguration {
     }
 
     @Bean
-    StackService stackService(StackAnimeService stackAnimeService, LibraryService libraryService, StackRepository stackRepository, StackMapper stackMapper, AnimeService animeService){
-        return new StackService(stackAnimeService, libraryService, stackRepository, stackMapper, animeService);
+    StackService stackService(StackAnimeService stackAnimeService,StackMangaService stackMangaService, LibraryService libraryService, StackRepository stackRepository, AnimeService animeService, MangaService mangaService){
+        return new StackService(stackAnimeService,stackMangaService, libraryService, stackRepository, animeService, mangaService);
     }
 
 

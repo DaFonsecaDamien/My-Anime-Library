@@ -41,8 +41,6 @@ public class StackAnimeServiceTest {
         StackAnime stackAnime = new StackAnime();
         stackAnime.setId(1L);
 
-
-
         when(stackAnimeRepository.saveStackAnime(stackAnime)).thenReturn(stackAnime);
         StackAnime saveStackAnime = stackAnimeService.saveAnimeInStack(stack, anime);
 
