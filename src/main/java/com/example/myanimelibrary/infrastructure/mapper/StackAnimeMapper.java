@@ -17,7 +17,7 @@ public class StackAnimeMapper {
         this.stackMapper = stackMapper;
     }
 
-    public StackAnime fromEntityToModel(StackAnimeEntity stackAnimeEntity){
+    public StackAnime fromEntityToModel(StackAnimeEntity stackAnimeEntity) {
         return new StackAnime(
                 stackAnimeEntity.getId(),
                 animeMapper.FromEntityToModel(stackAnimeEntity.getAnimeEntity()),
@@ -25,12 +25,12 @@ public class StackAnimeMapper {
         );
     }
 
-    public StackAnimeEntity fromModelToEntity(StackAnime stackAnime){
+    public StackAnimeEntity fromModelToEntity(StackAnime stackAnime) {
         return new StackAnimeEntity(
                 stackAnime.getId(),
                 stackMapper.fromModelToEntity(stackAnime.getStack()),
                 animeMapper.FromModelToEntity(stackAnime.getAnime())
-                );
+        );
     }
 
 }

@@ -12,11 +12,13 @@ import java.util.List;
 public interface JPAAnimeRepository extends JpaRepository<AnimeEntity, Long>, JpaSpecificationExecutor<AnimeEntity> {
 
     AnimeEntity findByTitlesContains(String title);
+
     AnimeEntity getAnimeEntityById(Long id);
+
     boolean existsAnimeEntityByTitlesContaining(String title);
 
     @Override
     List<AnimeEntity> findAll(Specification<AnimeEntity> spec);
 
-
+    List<AnimeEntity> getAnimeEntityByIdAndYear(Long id, int year);
 }

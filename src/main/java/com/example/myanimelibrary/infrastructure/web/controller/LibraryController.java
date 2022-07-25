@@ -32,48 +32,48 @@ public class LibraryController {
     }
 
     @PostMapping("/createStack") // ok
-    public ResponseEntity<Stack> createStack(@RequestBody CreateStackRequest request){
+    public ResponseEntity<Stack> createStack(@RequestBody CreateStackRequest request) {
         return ResponseEntity.ok(stackService.createStack(request));
     }
 
     @GetMapping("/{id}/stacks") // ok
-    public ResponseEntity<List<Stack>> getStacks(@PathVariable("id") Long libraryId){
+    public ResponseEntity<List<Stack>> getStacks(@PathVariable("id") Long libraryId) {
         return ResponseEntity.ok(stackService.getAllStackFromLibraryId(libraryId));
     }
 
     @PostMapping("/stack/copyStack") // ok but add verification of name and don't copy existing anime
-    public ResponseEntity<Stack> copyStack(@RequestBody CopyStackRequest request){
+    public ResponseEntity<Stack> copyStack(@RequestBody CopyStackRequest request) {
         return ResponseEntity.ok(stackService.copyStackByStackId(request));
     }
 
     @GetMapping("/stack/{stackId}/details")//ok
-    public ResponseEntity<Stack> getStackById(@PathVariable("stackId") Long stackId){
+    public ResponseEntity<Stack> getStackById(@PathVariable("stackId") Long stackId) {
         return ResponseEntity.ok(stackService.getLoadedStackById(stackId));
     }
 
     @GetMapping("/stack/{stackId}/getAnimes")// ok
-    public ResponseEntity<List<StackAnime>> getAllAnimeInStackByStackId(@PathVariable("stackId") Long stackId){
+    public ResponseEntity<List<StackAnime>> getAllAnimeInStackByStackId(@PathVariable("stackId") Long stackId) {
         return ResponseEntity.ok(stackService.getAllAnimeInStack(stackId));
     }
 
     @PostMapping("/stack/addAnime")//ok
-    public ResponseEntity<StackAnime> addAnimeToStack(@RequestBody AddAnimeToStackRequest request){
+    public ResponseEntity<StackAnime> addAnimeToStack(@RequestBody AddAnimeToStackRequest request) {
         return ResponseEntity.ok(stackService.saveAnimeInStack(request.getAnimeId(), request.getStackId()));
     }
 
     @PutMapping("/stack/update")// ok
-    public ResponseEntity<Stack> updateStack(@RequestBody UpdateStackRequest request){
+    public ResponseEntity<Stack> updateStack(@RequestBody UpdateStackRequest request) {
         return ResponseEntity.ok(stackService.updateStackById(request));
     }
 
     @DeleteMapping("/stack/{id}/delete") //ok
-    public ResponseEntity<Void> deleteStackById(@PathVariable("id") Long stackId){
+    public ResponseEntity<Void> deleteStackById(@PathVariable("id") Long stackId) {
         stackService.deleteStackById(stackId);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/stack/stackAnime/{id}/delete") // ok
-    public ResponseEntity<Void> deleteAnimeInStackById(@PathVariable("id") Long stackAnimeId){
+    public ResponseEntity<Void> deleteAnimeInStackById(@PathVariable("id") Long stackAnimeId) {
         stackService.deleteAnimeInStack(stackAnimeId);
         return ResponseEntity.ok().build();
     }

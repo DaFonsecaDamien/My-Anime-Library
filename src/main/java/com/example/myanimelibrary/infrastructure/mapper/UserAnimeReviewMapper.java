@@ -18,8 +18,7 @@ public class UserAnimeReviewMapper {
     }
 
 
-
-    public UserAnimeReview FromEntityToModel(UserAnimeReviewEntity userAnimeReviewEntity){
+    public UserAnimeReview FromEntityToModel(UserAnimeReviewEntity userAnimeReviewEntity) {
         return new UserAnimeReview(
                 userAnimeReviewEntity.getId(),
                 animeMapper.FromEntityToModel(userAnimeReviewEntity.getAnimeEntity()),
@@ -30,7 +29,8 @@ public class UserAnimeReviewMapper {
                 userAnimeReviewEntity.getAnimeSiteUri()
         );
     }
-    public UserAnimeReviewEntity FromModelToEntity(UserAnimeReview userAnimeReview){
+
+    public UserAnimeReviewEntity FromModelToEntity(UserAnimeReview userAnimeReview) {
         return new UserAnimeReviewEntity(
                 userAnimeReview.getId(),
                 animeMapper.FromModelToEntity(userAnimeReview.getAnime()),
@@ -42,7 +42,7 @@ public class UserAnimeReviewMapper {
         );
     }
 
-    public UserAnimeReview FromRequestToModel(CreateUserAnimeReviewRequest request){
+    public UserAnimeReview FromRequestToModel(CreateUserAnimeReviewRequest request) {
         return new UserAnimeReview(
                 null,
                 request.getAnime(),

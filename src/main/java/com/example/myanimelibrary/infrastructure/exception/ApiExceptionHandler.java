@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
-    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException){
+    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
         ApiException apiException = new ApiException(
                 resourceNotFoundException.getMessage(),
                 HttpStatus.NOT_FOUND,
@@ -21,7 +21,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(value = NameAlreadyTakenException.class)
-    public ResponseEntity<Object> handleNameAlreadyTakenException(NameAlreadyTakenException nameAlreadyTakenException){
+    public ResponseEntity<Object> handleNameAlreadyTakenException(NameAlreadyTakenException nameAlreadyTakenException) {
         ApiException apiException = new ApiException(
                 nameAlreadyTakenException.getMessage(),
                 HttpStatus.CONFLICT,
@@ -31,7 +31,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(value = AnimeAlreadyInStackException.class)
-    public ResponseEntity<Object> handleAnimeAlreadyInStackException(AnimeAlreadyInStackException animeAlreadyInStackException){
+    public ResponseEntity<Object> handleAnimeAlreadyInStackException(AnimeAlreadyInStackException animeAlreadyInStackException) {
         ApiException apiException = new ApiException(
                 animeAlreadyInStackException.getMessage(),
                 HttpStatus.CONFLICT,
@@ -39,4 +39,16 @@ public class ApiExceptionHandler {
 
         return new ResponseEntity<>(apiException, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(value = MangaAlreadyInStackException.class)
+    public ResponseEntity<Object> handleMangaAlreadyInStackException(MangaAlreadyInStackException mangaAlreadyInStackException) {
+        ApiException apiException = new ApiException(
+                mangaAlreadyInStackException.getMessage(),
+                HttpStatus.CONFLICT,
+                ZonedDateTime.now());
+
+        return new ResponseEntity<>(apiException, HttpStatus.CONFLICT);
+    }
+
+    //TODO: add more exception handlers here
 }

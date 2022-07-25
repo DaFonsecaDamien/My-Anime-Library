@@ -14,15 +14,15 @@ public class ScoreService {
         this.scoreRepository = scoreRepository;
     }
 
-    public List<Score> getAllscoreFromAnime(Anime anime){
+    public List<Score> getAllscoreFromAnime(Anime anime) {
         return scoreRepository.getAllScoreFromAnime(anime);
     }
 
-    public Score getScoreByAnimeAndValue(Integer value, Anime anime){
+    public Score getScoreByAnimeAndValue(Integer value, Anime anime) {
         return scoreRepository.getScoreByValueAndEntity(value, anime);
     }
 
-    public void saveScore(Score score){
+    public void saveScore(Score score) {
         scoreRepository.saveScore(score);
     }
 

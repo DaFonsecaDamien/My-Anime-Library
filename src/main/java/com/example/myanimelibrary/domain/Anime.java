@@ -149,20 +149,20 @@ public class Anime {
         this.ranking = ranking;
     }
 
-    public void makeAverage(List<Score> scores){
+    public void makeAverage(List<Score> scores) {
         float totalVotes = 0;
         float totalScore = 0;
 
-        for(Score score : scores){
+        for (Score score : scores) {
             totalVotes += score.getNbVotes();
-            totalScore += score.getValue()*score.getNbVotes();
+            totalScore += score.getValue() * score.getNbVotes();
         }
-        this.averageScore = totalScore/totalVotes;
+        this.averageScore = totalScore / totalVotes;
     }
 
-    public void updateNbVotes(List<Score> scores){
+    public void updateNbVotes(List<Score> scores) {
         Integer totalVotes = 0;
-        for(Score score : scores){
+        for (Score score : scores) {
             totalVotes += score.getNbVotes();
         }
         this.nbVotes = totalVotes;

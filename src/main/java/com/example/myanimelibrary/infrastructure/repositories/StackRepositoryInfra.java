@@ -61,7 +61,7 @@ public class StackRepositoryInfra implements StackRepository {
     @Override
     public Stack getStackById(Long id) {
         Optional<StackEntity> stackEntityOptional = jpaStackRepository.findById(id);
-        if( stackEntityOptional.isEmpty()){
+        if (stackEntityOptional.isEmpty()) {
             throw new ResourceNotFoundException("stack not found");
         }
         return stackMapper.fromEntityToModel(stackEntityOptional.get());

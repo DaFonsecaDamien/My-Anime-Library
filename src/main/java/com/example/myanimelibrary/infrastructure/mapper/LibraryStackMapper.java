@@ -17,14 +17,14 @@ public class LibraryStackMapper {
         this.stackMapper = stackMapper;
     }
 
-    public LibraryStack fromEntityToModel(LibraryStackEntity libraryStackEntity){
+    public LibraryStack fromEntityToModel(LibraryStackEntity libraryStackEntity) {
         return new LibraryStack(
                 libraryMapper.fromEntityToModel(libraryStackEntity.getLibraryEntity()),
                 stackMapper.fromEntityToModel(libraryStackEntity.getStack())
         );
     }
 
-    public LibraryStackEntity fromModelToEntity(LibraryStack libraryStack){
+    public LibraryStackEntity fromModelToEntity(LibraryStack libraryStack) {
         return new LibraryStackEntity(
                 libraryMapper.fromModelToEntity(libraryStack.getLibrary()),
                 stackMapper.fromModelToEntity(libraryStack.getStacks())

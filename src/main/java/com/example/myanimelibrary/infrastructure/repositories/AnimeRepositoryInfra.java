@@ -38,51 +38,53 @@ public class AnimeRepositoryInfra implements AnimeRepository {
         List<SearchFilter> postQueryFilters = new ArrayList<>();
         List<SearchFilter> filteredFilters = new ArrayList<>();
         List<String> postQueryFiltersField = Arrays.asList("title", "genre");
-        for (SearchFilter filter : filters){
-                if( !Collections.disjoint(Collections.singletonList(filter.getField()), postQueryFiltersField)){
-                    postQueryFilters.add(filter);
-                } else {
-                    filteredFilters.add(filter);
-                }
+        for (SearchFilter filter : filters) {
+            if (!Collections.disjoint(Collections.singletonList(filter.getField()), postQueryFiltersField)) {
+                postQueryFilters.add(filter);
+            } else {
+                filteredFilters.add(filter);
+            }
 
         }
-        List<AnimeEntity> animeEntities = new ArrayList<>();
-        if( filteredFilters.size() > 0) {
+        List<AnimeEntity> animeEntities;
+        if (filteredFilters.size() > 0) {
             animeEntities = jpaAnimeRepository.findAll(SpecificationMapper.FromSearchFilterToSpecification(filteredFilters));
+        } else {
+            animeEntities = jpaAnimeRepository.findAll();
         }
         List<AnimeEntity> animeEntitiesPostFiltered = getAnimeEntityByApplyingPostFilters(postQueryFilters, animeEntities);
 
         return animeEntitiesPostFiltered.stream().map(animeMapper::FromEntityToModel).collect(Collectors.toList());
     }
 
-    private List<AnimeEntity> getAnimeEntityByApplyingPostFilters(List<SearchFilter> filters, List<AnimeEntity> animeEntities){
+    private List<AnimeEntity> getAnimeEntityByApplyingPostFilters(List<SearchFilter> filters, List<AnimeEntity> animeEntities) {
         List<AnimeEntity> filteredAnimeEntities = new ArrayList<>();
-        for (int j = 0; j< filters.size(); j++){
-            for (int i = 0 ; i < animeEntities.size(); i++){
-                if (filters.get(j).getField().equals("title") ){
-                    if( animeEntities.get(i).getTitles().get("") != null &&
-                            animeEntities.get(i).getTitles().get("").matches("(?i).*" + filters.get(j).getValue() + ".*" )) {
+        for (int j = 0; j < filters.size(); j++) {
+            for (int i = 0; i < animeEntities.size(); i++) {
+                if (filters.get(j).getField().equals("title")) {
+                    if (animeEntities.get(i).getTitles().get("") != null &&
+                            animeEntities.get(i).getTitles().get("").matches("(?i).*" + filters.get(j).getValue() + ".*")) {
                         filteredAnimeEntities.add(animeEntities.get(i));
                         continue;
                     }
-                    if( animeEntities.get(i).getTitles().get("ja") != null &&
-                            animeEntities.get(i).getTitles().get("ja").matches("(?i).*" + filters.get(j).getValue() + ".*" )) {
+                    if (animeEntities.get(i).getTitles().get("ja") != null &&
+                            animeEntities.get(i).getTitles().get("ja").matches("(?i).*" + filters.get(j).getValue() + ".*")) {
                         filteredAnimeEntities.add(animeEntities.get(i));
                         continue;
                     }
-                    if( animeEntities.get(i).getTitles().get("en") != null &&
-                            animeEntities.get(i).getTitles().get("en").matches("(?i).*" + filters.get(j).getValue() + ".*" )) {
+                    if (animeEntities.get(i).getTitles().get("en") != null &&
+                            animeEntities.get(i).getTitles().get("en").matches("(?i).*" + filters.get(j).getValue() + ".*")) {
                         filteredAnimeEntities.add(animeEntities.get(i));
                         continue;
                     }
                 }
-                if (filters.get(j).getField().equals("genre")){
-                    if(!Collections.disjoint( filters.get(j).getValues(), animeEntities.get(i).getGenre())){
+                if (filters.get(j).getField().equals("genre")) {
+                    if (!Collections.disjoint(filters.get(j).getValues(), animeEntities.get(i).getGenre())) {
                         filteredAnimeEntities.add(animeEntities.get(i));
                     }
                 }
             }
-            if( j == filters.size()-1 ){
+            if (j == filters.size() - 1) {
                 break;
             }
             animeEntities = new ArrayList<>(filteredAnimeEntities);
@@ -94,7 +96,7 @@ public class AnimeRepositoryInfra implements AnimeRepository {
     @Override
     public Anime getAnimeById(Long id) {
         Optional<AnimeEntity> animeEntityOptional = jpaAnimeRepository.findById(id);
-        if( animeEntityOptional.isEmpty()){
+        if (animeEntityOptional.isEmpty()) {
             throw new ResourceNotFoundException("Element not found");
         }
         return animeMapper.FromEntityToModel(jpaAnimeRepository.getAnimeEntityById(id));

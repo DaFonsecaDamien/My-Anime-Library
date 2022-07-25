@@ -11,15 +11,12 @@ public class LibraryService {
         this.libraryRepository = libraryRepository;
     }
 
-    public Library getLibraryById(Long id){
+    public Library getLibraryById(Long id) {
         return libraryRepository.getLibraryById(id);
     }
 
-    public Library getLibraryByUserId(Long userId){
+    public Library getLibraryByUserId(Long userId) {
         return libraryRepository.getLibraryByUserId(userId);
     }
 
-//    public Library createLibrary(User user, String name){
-//
-//    }
 }

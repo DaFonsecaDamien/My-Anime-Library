@@ -33,7 +33,7 @@ public class LibraryRepositoryInfra implements LibraryRepository {
     @Override
     public Library getLibraryById(Long id) {
         Optional<LibraryEntity> libraryEntityOptional = jpaLibraryRepository.findById(id);
-        if( libraryEntityOptional.isEmpty()){
+        if (libraryEntityOptional.isEmpty()) {
             throw new ResourceNotFoundException("Library Not Found");
         }
         return libraryMapper.fromEntityToModel(libraryEntityOptional.get());
