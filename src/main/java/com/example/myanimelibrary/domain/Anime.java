@@ -37,6 +37,9 @@ public class Anime {
         this.ranking = ranking;
     }
 
+    public Anime() {
+    }
+
     public Long getId() {
         return id;
     }

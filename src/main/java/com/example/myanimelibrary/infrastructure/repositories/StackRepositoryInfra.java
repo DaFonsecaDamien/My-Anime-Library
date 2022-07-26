@@ -20,13 +20,11 @@ import java.util.stream.Collectors;
 public class StackRepositoryInfra implements StackRepository {
 
     private final JPAStackRepository jpaStackRepository;
-    private final LibraryRepositoryInfra libraryRepositoryInfra;
     private final StackMapper stackMapper;
     private final LibraryMapper libraryMapper;
 
-    public StackRepositoryInfra(JPAStackRepository jpaStackRepository, LibraryRepositoryInfra libraryRepositoryInfra, StackMapper stackMapper, LibraryMapper libraryMapper) {
+    public StackRepositoryInfra(JPAStackRepository jpaStackRepository, StackMapper stackMapper, LibraryMapper libraryMapper) {
         this.jpaStackRepository = jpaStackRepository;
-        this.libraryRepositoryInfra = libraryRepositoryInfra;
         this.stackMapper = stackMapper;
         this.libraryMapper = libraryMapper;
     }

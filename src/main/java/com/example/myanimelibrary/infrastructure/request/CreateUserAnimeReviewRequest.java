@@ -23,6 +23,9 @@ public class CreateUserAnimeReviewRequest {
         this.animeSiteUri = animeSiteUri;
     }
 
+    public CreateUserAnimeReviewRequest() {
+    }
+
     public Anime getAnime() {
         return anime;
     }
