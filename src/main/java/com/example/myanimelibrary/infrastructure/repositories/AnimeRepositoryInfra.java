@@ -130,4 +130,8 @@ public class AnimeRepositoryInfra implements AnimeRepository {
     public boolean existsAnimeEntityByTitlesContaining(String title) {
         return jpaAnimeRepository.existsAnimeEntityByTitlesContaining(title);
     }
+
+    public void deleteAnimeById(Long id){
+        jpaAnimeRepository.deleteById(id);
+    }
 }
